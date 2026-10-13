@@ -4980,7 +4980,7 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
         <div class="pulse-dot"></div>
         <h1>쿠버네티스 아키텍처 — 애드온 포함</h1>
       </div>
-      <p class="subtitle">1일차 2교시 · kubectl → API Server → kubelet → 컨테이너 + CoreDNS · kube-proxy · Calico</p>
+      <p class="subtitle">1일차 2교시 · kubectl → API Server → kubelet → containerd → 컨테이너 + CoreDNS · kube-proxy · Calico</p>
     </div>
 
 
@@ -4988,9 +4988,9 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
     <!-- Main Diagram -->
     <div class="diagram-container" data-detail-level="read"
          data-preset-badge-editorial-plate="ARCHIFY / PLATE 04">
-      <svg viewBox="0 0 1080 772" role="img" lang="en" aria-labelledby="archify-diagram-title archify-diagram-description" data-preset="classic" data-quality-profile="showcase" data-reader-fit="intrinsic-height" data-reader-min-text="7.5" data-reader-primary-text="14">
+      <svg viewBox="0 0 1100 808" role="img" lang="en" aria-labelledby="archify-diagram-title archify-diagram-description" data-preset="classic" data-quality-profile="showcase" data-reader-fit="intrinsic-height" data-reader-min-text="7.5" data-reader-primary-text="14">
         <title id="archify-diagram-title">쿠버네티스 아키텍처 — 애드온 포함</title>
-        <desc id="archify-diagram-description">1일차 2교시 · kubectl → API Server → kubelet → 컨테이너 + CoreDNS · kube-proxy · Calico</desc>
+        <desc id="archify-diagram-description">1일차 2교시 · kubectl → API Server → kubelet → containerd → 컨테이너 + CoreDNS · kube-proxy · Calico</desc>
         <!-- Definitions -->
         <defs>
           <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
@@ -5014,11 +5014,11 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
         <rect width="100%" height="100%" fill="url(#grid)" />
 
         <!-- Boundaries (behind everything) -->
-        <rect data-graph-role="structural-frame" data-composition-frame-kind="region" data-composition-frame-id="0" data-composition-frame-label="cap-master · 컨트롤 플레인" x="440" y="30" width="470" height="384" rx="12" class="c-region" stroke-width="1"/>
+        <rect data-graph-role="structural-frame" data-composition-frame-kind="region" data-composition-frame-id="0" data-composition-frame-label="cap-master · 컨트롤 플레인" x="410" y="30" width="610" height="384" rx="12" class="c-region" stroke-width="1"/>
 
-        <rect data-graph-role="structural-frame" data-composition-frame-kind="region" data-composition-frame-id="1" data-composition-frame-label="cap-node1 · 워커 노드" x="210" y="420" width="400" height="284" rx="12" class="c-region" stroke-width="1"/>
+        <rect data-graph-role="structural-frame" data-composition-frame-kind="region" data-composition-frame-id="1" data-composition-frame-label="cap-node1 · 워커 노드" x="80" y="420" width="530" height="320" rx="12" class="c-region" stroke-width="1"/>
 
-        <rect data-graph-role="structural-frame" data-composition-frame-kind="region" data-composition-frame-id="2" data-composition-frame-label="cap-node2 · 워커 노드" x="650" y="420" width="390" height="284" rx="12" class="c-region" stroke-width="1"/>
+        <rect data-graph-role="structural-frame" data-composition-frame-kind="region" data-composition-frame-id="2" data-composition-frame-label="cap-node2 · 워커 노드" x="630" y="420" width="430" height="320" rx="12" class="c-region" stroke-width="1"/>
 
         <!-- Connection paths (before components for correct z-order) -->
         <g data-graph-role="automatic-crossover" style="--step:0">
@@ -5026,16 +5026,16 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
           <path data-edge-from="user" data-edge-to="kubectl" data-edge-label="명령 입력" data-edge-key="0" data-edge-id="user-kubectl" data-composition-points="140,208;220,208" data-composition-crossover="halo" data-composition-independent="true" d="M 140 208 L 220 208" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
         </g>
         <g data-graph-role="automatic-crossover" style="--step:1">
-          <path data-graph-role="automatic-crossover-underlay" d="M 350 208 L 402 208 Q 410 208 410 216 L 410 240 Q 410 248 418 248 L 470 248" fill="none" stroke="var(--mask)" stroke-width="5.8" stroke-linecap="round" stroke-linejoin="round" pointer-events="none"/>
-          <path data-edge-from="kubectl" data-edge-to="cp-api" data-edge-label="HTTPS :6443" data-edge-key="1" data-edge-id="kubectl-api" data-composition-points="350,208;410,208;410,248;470,248" data-composition-crossover="halo" data-composition-independent="true" d="M 350 208 L 402 208 Q 410 208 410 216 L 410 240 Q 410 248 418 248 L 470 248" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+          <path data-graph-role="automatic-crossover-underlay" d="M 350 208 L 438 208 Q 446 208 446 216 L 446 240 Q 446 248 454 248 L 470 248" fill="none" stroke="var(--mask)" stroke-width="5.8" stroke-linecap="round" stroke-linejoin="round" pointer-events="none"/>
+          <path data-edge-from="kubectl" data-edge-to="cp-api" data-edge-label="HTTPS :6443" data-edge-key="1" data-edge-id="kubectl-api" data-composition-points="350,208;446,208;446,248;470,248" data-composition-crossover="halo" data-composition-independent="true" d="M 350 208 L 438 208 Q 446 208 446 216 L 446 240 Q 446 248 454 248 L 470 248" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
         </g>
         <g data-graph-role="automatic-crossover" style="--step:2">
-          <path data-graph-role="automatic-crossover-underlay" d="M 543 124 L 543 210" fill="none" stroke="var(--mask)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round" pointer-events="none"/>
-          <path data-edge-from="sched" data-edge-to="cp-api" data-edge-label="배치 결정" data-edge-key="2" data-edge-id="sched-api" data-composition-points="543,124;543,210" data-composition-crossover="halo" data-composition-independent="true" d="M 543 124 L 543 210" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+          <path data-graph-role="automatic-crossover-underlay" d="M 515 124 L 515 159 Q 515 167 523 167 L 535 167 Q 543 167 543 175 L 543 210" fill="none" stroke="var(--mask)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round" pointer-events="none"/>
+          <path data-edge-from="sched" data-edge-to="cp-api" data-edge-label="배치 결정" data-edge-key="2" data-edge-id="sched-api" data-composition-points="515,124;515,167;543,167;543,210" data-composition-crossover="halo" data-composition-independent="true" d="M 515 124 L 515 159 Q 515 167 523 167 L 535 167 Q 543 167 543 175 L 543 210" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
         </g>
         <g data-graph-role="automatic-crossover" style="--step:3">
-          <path data-graph-role="automatic-crossover-underlay" d="M 740 124 L 740 159 Q 740 167 732 167 L 565 167 Q 557 167 557 175 L 557 210" fill="none" stroke="var(--mask)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round" pointer-events="none"/>
-          <path data-edge-from="cm" data-edge-to="cp-api" data-edge-label="조정 루프" data-edge-key="3" data-edge-id="cm-api" data-composition-points="740,124;740,167;557,167;557,210" data-composition-crossover="halo" data-composition-independent="true" d="M 740 124 L 740 159 Q 740 167 732 167 L 565 167 Q 557 167 557 175 L 557 210" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+          <path data-graph-role="automatic-crossover-underlay" d="M 700 124 L 700 159 Q 700 167 692 167 L 565 167 Q 557 167 557 175 L 557 210" fill="none" stroke="var(--mask)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round" pointer-events="none"/>
+          <path data-edge-from="cm" data-edge-to="cp-api" data-edge-label="조정 루프" data-edge-key="3" data-edge-id="cm-api" data-composition-points="700,124;700,167;557,167;557,210" data-composition-crossover="halo" data-composition-independent="true" d="M 700 124 L 700 159 Q 700 167 692 167 L 565 167 Q 557 167 557 175 L 557 210" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
         </g>
         <g data-graph-role="automatic-crossover" style="--step:4">
           <path data-graph-role="automatic-crossover-underlay" d="M 630 248 L 730 248" fill="none" stroke="var(--mask)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round" pointer-events="none"/>
@@ -5050,16 +5050,24 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
           <path data-edge-from="kubelet2" data-edge-to="cp-api" data-edge-label="보고" data-edge-key="6" data-edge-id="kubelet2-api" data-composition-points="765,450;765,310;557,310;557,286" data-composition-crossover="halo" data-composition-independent="true" d="M 765 450 L 765 318 Q 765 310 757 310 L 565 310 Q 557 310 557 302 L 557 286" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
         </g>
         <g data-graph-role="automatic-crossover" style="--step:7">
-          <path data-graph-role="automatic-crossover-underlay" d="M 365 522 L 365 563 Q 365 571 357 571 L 316 571 Q 308 571 308 579 L 308 620" fill="none" stroke="var(--mask)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round" pointer-events="none"/>
-          <path data-edge-from="kubelet1" data-edge-to="pod1" data-edge-label="실행 지시" data-edge-key="7" data-edge-id="kubelet1-pod1" data-composition-points="365,522;365,571;308,571;308,620" data-composition-crossover="halo" data-composition-independent="true" d="M 365 522 L 365 563 Q 365 571 357 571 L 316 571 Q 308 571 308 579 L 308 620" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+          <path data-graph-role="automatic-crossover-underlay" d="M 365 522 L 365 533 Q 365 541 357 541 L 338 541 Q 330 541 330 549 L 330 560" fill="none" stroke="var(--mask)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round" pointer-events="none"/>
+          <path data-edge-from="kubelet1" data-edge-to="rt1" data-edge-label="실행 지시" data-edge-key="7" data-edge-id="kubelet1-rt1" data-composition-points="365,522;365,541;330,541;330,560" data-composition-crossover="halo" data-composition-independent="true" d="M 365 522 L 365 533 Q 365 541 357 541 L 338 541 Q 330 541 330 549 L 330 560" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
         </g>
         <g data-graph-role="automatic-crossover" style="--step:8">
-          <path data-graph-role="automatic-crossover-underlay" d="M 765 522 L 765 620" fill="none" stroke="var(--mask)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round" pointer-events="none"/>
-          <path data-edge-from="kubelet2" data-edge-to="pod2" data-edge-label="실행 지시" data-edge-key="8" data-edge-id="kubelet2-pod2" data-composition-points="765,522;765,620" data-composition-crossover="halo" data-composition-independent="true" d="M 765 522 L 765 620" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+          <path data-graph-role="automatic-crossover-underlay" d="M 400 590 L 407.5 590 Q 415 590 415 597.5 L 415 682.5 Q 415 690 422.5 690 L 430 690" fill="none" stroke="var(--mask)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round" pointer-events="none"/>
+          <path data-edge-from="rt1" data-edge-to="pod1" data-edge-label="컨테이너 생성" data-edge-key="8" data-edge-id="rt1-pod1" data-composition-points="400,590;415,590;415,690;430,690" data-composition-crossover="halo" data-composition-independent="true" d="M 400 590 L 407.5 590 Q 415 590 415 597.5 L 415 682.5 Q 415 690 422.5 690 L 430 690" class="a-dashed" stroke-width="1.5" marker-end="url(#arrowhead-dashed)"/>
         </g>
         <g data-graph-role="automatic-crossover" style="--step:9">
-          <path data-graph-role="automatic-crossover-underlay" d="M 322 620 L 322 604 Q 322 596 330 596 L 537 596 Q 545 596 545 588 L 545 394" fill="none" stroke="var(--mask)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round" pointer-events="none"/>
-          <path data-edge-from="pod1" data-edge-to="coredns" data-edge-label="서비스 이름 조회" data-edge-key="9" data-edge-id="pod1-dns" data-composition-points="322,620;322,596;545,596;545,394" data-composition-crossover="halo" data-composition-independent="true" d="M 322 620 L 322 604 Q 322 596 330 596 L 537 596 Q 545 596 545 588 L 545 394" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+          <path data-graph-role="automatic-crossover-underlay" d="M 765 522 L 765 533 Q 765 541 757 541 L 738 541 Q 730 541 730 549 L 730 560" fill="none" stroke="var(--mask)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round" pointer-events="none"/>
+          <path data-edge-from="kubelet2" data-edge-to="rt2" data-edge-label="실행 지시" data-edge-key="9" data-edge-id="kubelet2-rt2" data-composition-points="765,522;765,541;730,541;730,560" data-composition-crossover="halo" data-composition-independent="true" d="M 765 522 L 765 533 Q 765 541 757 541 L 738 541 Q 730 541 730 549 L 730 560" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        </g>
+        <g data-graph-role="automatic-crossover" style="--step:10">
+          <path data-graph-role="automatic-crossover-underlay" d="M 800 590 L 807.5 590 Q 815 590 815 597.5 L 815 682.5 Q 815 690 822.5 690 L 830 690" fill="none" stroke="var(--mask)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round" pointer-events="none"/>
+          <path data-edge-from="rt2" data-edge-to="pod2" data-edge-label="컨테이너 생성" data-edge-key="10" data-edge-id="rt2-pod2" data-composition-points="800,590;815,590;815,690;830,690" data-composition-crossover="halo" data-composition-independent="true" d="M 800 590 L 807.5 590 Q 815 590 815 597.5 L 815 682.5 Q 815 690 822.5 690 L 830 690" class="a-dashed" stroke-width="1.5" marker-end="url(#arrowhead-dashed)"/>
+        </g>
+        <g data-graph-role="automatic-crossover" style="--step:11">
+          <path data-graph-role="automatic-crossover-underlay" d="M 505 660 L 505 535 Q 505 527 513 527 L 537 527 Q 545 527 545 519 L 545 394" fill="none" stroke="var(--mask)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round" pointer-events="none"/>
+          <path data-edge-from="pod1" data-edge-to="coredns" data-edge-label="서비스 이름 조회" data-edge-key="11" data-edge-id="pod1-dns" data-composition-points="505,660;505,527;545,527;545,394" data-composition-crossover="halo" data-composition-independent="true" d="M 505 660 L 505 535 Q 505 527 513 527 L 537 527 Q 545 527 545 519 L 545 394" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
         </g>
 
         <!-- Components -->
@@ -5113,24 +5121,35 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
 
         <g id="node-sched" data-node-id="sched" data-node-label="kube-scheduler" tabindex="0" role="button" aria-label="Focus kube-scheduler, 어느 노드에 둘지 결정, cap-master · 컨트롤 플레인" aria-pressed="false" data-node-kind="backend" data-node-sublabel="어느 노드에 둘지 결정" data-node-context="cap-master · 컨트롤 플레인">
           <title>kube-scheduler · 어느 노드에 둘지 결정 · cap-master · 컨트롤 플레인</title>
-          <rect x="470" y="60" width="150" height="64" rx="6" class="c-mask"/>
-          <rect x="470" y="60" width="150" height="64" rx="6" class="c-backend" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(476 66) scale(0.6875)">
+          <rect x="440" y="60" width="150" height="64" rx="6" class="c-mask"/>
+          <rect x="440" y="60" width="150" height="64" rx="6" class="c-backend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(446 66) scale(0.6875)">
             <path d="M6 3 3 8l3 5M10 3l3 5-3 5"/>
           </g>
-          <text data-node-label="" data-detail-anchor="" x="545" y="90" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">kube-scheduler</text>
-        <text data-detail="context" x="545" y="106" class="t-muted" font-size="9" text-anchor="middle">어느 노드에 둘지 결정</text>
+          <text data-node-label="" data-detail-anchor="" x="515" y="90" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">kube-scheduler</text>
+        <text data-detail="context" x="515" y="106" class="t-muted" font-size="9" text-anchor="middle">어느 노드에 둘지 결정</text>
         </g>
 
         <g id="node-cm" data-node-id="cm" data-node-label="controller-manager" tabindex="0" role="button" aria-label="Focus controller-manager, 자동 복구 · 스케일 루프, cap-master · 컨트롤 플레인" aria-pressed="false" data-node-kind="backend" data-node-sublabel="자동 복구 · 스케일 루프" data-node-context="cap-master · 컨트롤 플레인">
           <title>controller-manager · 자동 복구 · 스케일 루프 · cap-master · 컨트롤 플레인</title>
-          <rect x="660" y="60" width="160" height="64" rx="6" class="c-mask"/>
-          <rect x="660" y="60" width="160" height="64" rx="6" class="c-backend" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(666 66) scale(0.6875)">
+          <rect x="620" y="60" width="160" height="64" rx="6" class="c-mask"/>
+          <rect x="620" y="60" width="160" height="64" rx="6" class="c-backend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(626 66) scale(0.6875)">
             <path d="M6 3 3 8l3 5M10 3l3 5-3 5"/>
           </g>
-          <text data-node-label="" data-detail-anchor="" x="740" y="90" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">controller-manager</text>
-        <text data-detail="context" x="740" y="106" class="t-muted" font-size="9" text-anchor="middle">자동 복구 · 스케일 루프</text>
+          <text data-node-label="" data-detail-anchor="" x="700" y="90" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">controller-manager</text>
+        <text data-detail="context" x="700" y="106" class="t-muted" font-size="9" text-anchor="middle">자동 복구 · 스케일 루프</text>
+        </g>
+
+        <g id="node-ccm" data-node-id="ccm" data-node-label="cloud-controller-manager" tabindex="0" role="button" aria-label="Focus cloud-controller-manager, LB · 볼륨 등 클라우드 연동, cap-master · 컨트롤 플레인" aria-pressed="false" data-node-kind="cloud" data-node-sublabel="LB · 볼륨 등 클라우드 연동" data-node-context="cap-master · 컨트롤 플레인">
+          <title>cloud-controller-manager · LB · 볼륨 등 클라우드 연동 · cap-master · 컨트롤 플레인</title>
+          <rect x="810" y="60" width="180" height="64" rx="6" class="c-mask"/>
+          <rect x="810" y="60" width="180" height="64" rx="6" class="c-cloud" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="cloud" class="semantic-sigil s-cloud" transform="translate(816 66) scale(0.6875)">
+            <path d="M4.3 12.5h7.3a2.4 2.4 0 0 0 .2-4.8 4 4 0 0 0-7.5-1.3A3.1 3.1 0 0 0 4.3 12.5Z"/>
+          </g>
+          <text data-node-label="" data-detail-anchor="" x="900" y="90" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">cloud-controller-manager</text>
+        <text data-detail="context" x="900" y="106" class="t-muted" font-size="9" text-anchor="middle">LB · 볼륨 등 클라우드 연동</text>
         </g>
 
         <g id="node-coredns" data-node-id="coredns" data-node-label="CoreDNS" tabindex="0" role="button" aria-label="Focus CoreDNS, 클러스터 DNS · 애드온, cap-master · 컨트롤 플레인" aria-pressed="false" data-node-kind="backend" data-node-sublabel="클러스터 DNS · 애드온" data-node-tag="kube-system" data-node-context="cap-master · 컨트롤 플레인">
@@ -5145,70 +5164,92 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
         <text data-detail="fine" x="545" y="386" class="t-backend" font-size="7" text-anchor="middle">kube-system</text>
         </g>
 
-        <g id="node-kubelet1" data-node-id="kubelet1" data-node-label="kubelet" tabindex="0" role="button" aria-label="Focus kubelet, containerd에 실행 지시, cap-node1 · 워커 노드" aria-pressed="false" data-node-kind="backend" data-node-sublabel="containerd에 실행 지시" data-node-context="cap-node1 · 워커 노드">
-          <title>kubelet · containerd에 실행 지시 · cap-node1 · 워커 노드</title>
+        <g id="node-kubelet1" data-node-id="kubelet1" data-node-label="kubelet" tabindex="0" role="button" aria-label="Focus kubelet, 실행 지시 · 상태 보고, cap-node1 · 워커 노드" aria-pressed="false" data-node-kind="backend" data-node-sublabel="실행 지시 · 상태 보고" data-node-context="cap-node1 · 워커 노드">
+          <title>kubelet · 실행 지시 · 상태 보고 · cap-node1 · 워커 노드</title>
           <rect x="280" y="450" width="170" height="72" rx="6" class="c-mask"/>
           <rect x="280" y="450" width="170" height="72" rx="6" class="c-backend" stroke-width="1.5"/>
           <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(286 456) scale(0.6875)">
             <path d="M6 3 3 8l3 5M10 3l3 5-3 5"/>
           </g>
           <text data-node-label="" data-detail-anchor="" x="365" y="484" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">kubelet</text>
-        <text data-detail="context" x="365" y="500" class="t-muted" font-size="9" text-anchor="middle">containerd에 실행 지시</text>
+        <text data-detail="context" x="365" y="500" class="t-muted" font-size="9" text-anchor="middle">실행 지시 · 상태 보고</text>
+        </g>
+
+        <g id="node-rt1" data-node-id="rt1" data-node-label="containerd" tabindex="0" role="button" aria-label="Focus containerd, 컨테이너 실행, cap-node1 · 워커 노드" aria-pressed="false" data-node-kind="backend" data-node-sublabel="컨테이너 실행" data-node-context="cap-node1 · 워커 노드">
+          <title>containerd · 컨테이너 실행 · cap-node1 · 워커 노드</title>
+          <rect x="260" y="560" width="140" height="60" rx="6" class="c-mask"/>
+          <rect x="260" y="560" width="140" height="60" rx="6" class="c-backend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(266 566) scale(0.6875)">
+            <path d="M6 3 3 8l3 5M10 3l3 5-3 5"/>
+          </g>
+          <text data-node-label="" data-detail-anchor="" x="330" y="588" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">containerd</text>
+        <text data-detail="context" x="330" y="604" class="t-muted" font-size="9" text-anchor="middle">컨테이너 실행</text>
         </g>
 
         <g id="node-pod1" data-node-id="pod1" data-node-label="Pod A" tabindex="0" role="button" aria-label="Focus Pod A, 컨테이너 실행 중, cap-node1 · 워커 노드" aria-pressed="false" data-node-kind="backend" data-node-sublabel="컨테이너 실행 중" data-node-context="cap-node1 · 워커 노드">
           <title>Pod A · 컨테이너 실행 중 · cap-node1 · 워커 노드</title>
-          <rect x="240" y="620" width="150" height="64" rx="6" class="c-mask"/>
-          <rect x="240" y="620" width="150" height="64" rx="6" class="c-backend" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(246 626) scale(0.6875)">
+          <rect x="430" y="660" width="150" height="60" rx="6" class="c-mask"/>
+          <rect x="430" y="660" width="150" height="60" rx="6" class="c-backend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(436 666) scale(0.6875)">
             <path d="M6 3 3 8l3 5M10 3l3 5-3 5"/>
           </g>
-          <text data-node-label="" data-detail-anchor="" x="315" y="650" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Pod A</text>
-        <text data-detail="context" x="315" y="666" class="t-muted" font-size="9" text-anchor="middle">컨테이너 실행 중</text>
+          <text data-node-label="" data-detail-anchor="" x="505" y="688" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Pod A</text>
+        <text data-detail="context" x="505" y="704" class="t-muted" font-size="9" text-anchor="middle">컨테이너 실행 중</text>
         </g>
 
         <g id="node-kpx1" data-node-id="kpx1" data-node-label="kube-proxy" tabindex="0" role="button" aria-label="Focus kube-proxy, iptables 규칙 관리, cap-node1 · 워커 노드" aria-pressed="false" data-node-kind="backend" data-node-sublabel="iptables 규칙 관리" data-node-context="cap-node1 · 워커 노드">
           <title>kube-proxy · iptables 규칙 관리 · cap-node1 · 워커 노드</title>
-          <rect x="430" y="620" width="150" height="64" rx="6" class="c-mask"/>
-          <rect x="430" y="620" width="150" height="64" rx="6" class="c-backend" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(436 626) scale(0.6875)">
+          <rect x="110" y="660" width="150" height="60" rx="6" class="c-mask"/>
+          <rect x="110" y="660" width="150" height="60" rx="6" class="c-backend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(116 666) scale(0.6875)">
             <path d="M6 3 3 8l3 5M10 3l3 5-3 5"/>
           </g>
-          <text data-node-label="" data-detail-anchor="" x="505" y="650" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">kube-proxy</text>
-        <text data-detail="context" x="505" y="666" class="t-muted" font-size="9" text-anchor="middle">iptables 규칙 관리</text>
+          <text data-node-label="" data-detail-anchor="" x="185" y="688" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">kube-proxy</text>
+        <text data-detail="context" x="185" y="704" class="t-muted" font-size="9" text-anchor="middle">iptables 규칙 관리</text>
         </g>
 
-        <g id="node-kubelet2" data-node-id="kubelet2" data-node-label="kubelet" tabindex="0" role="button" aria-label="Focus kubelet, containerd에 실행 지시, cap-node2 · 워커 노드" aria-pressed="false" data-node-kind="backend" data-node-sublabel="containerd에 실행 지시" data-node-context="cap-node2 · 워커 노드">
-          <title>kubelet · containerd에 실행 지시 · cap-node2 · 워커 노드</title>
+        <g id="node-kubelet2" data-node-id="kubelet2" data-node-label="kubelet" tabindex="0" role="button" aria-label="Focus kubelet, 실행 지시 · 상태 보고, cap-node2 · 워커 노드" aria-pressed="false" data-node-kind="backend" data-node-sublabel="실행 지시 · 상태 보고" data-node-context="cap-node2 · 워커 노드">
+          <title>kubelet · 실행 지시 · 상태 보고 · cap-node2 · 워커 노드</title>
           <rect x="680" y="450" width="170" height="72" rx="6" class="c-mask"/>
           <rect x="680" y="450" width="170" height="72" rx="6" class="c-backend" stroke-width="1.5"/>
           <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(686 456) scale(0.6875)">
             <path d="M6 3 3 8l3 5M10 3l3 5-3 5"/>
           </g>
           <text data-node-label="" data-detail-anchor="" x="765" y="484" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">kubelet</text>
-        <text data-detail="context" x="765" y="500" class="t-muted" font-size="9" text-anchor="middle">containerd에 실행 지시</text>
+        <text data-detail="context" x="765" y="500" class="t-muted" font-size="9" text-anchor="middle">실행 지시 · 상태 보고</text>
+        </g>
+
+        <g id="node-rt2" data-node-id="rt2" data-node-label="containerd" tabindex="0" role="button" aria-label="Focus containerd, 컨테이너 실행, cap-node2 · 워커 노드" aria-pressed="false" data-node-kind="backend" data-node-sublabel="컨테이너 실행" data-node-context="cap-node2 · 워커 노드">
+          <title>containerd · 컨테이너 실행 · cap-node2 · 워커 노드</title>
+          <rect x="660" y="560" width="140" height="60" rx="6" class="c-mask"/>
+          <rect x="660" y="560" width="140" height="60" rx="6" class="c-backend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(666 566) scale(0.6875)">
+            <path d="M6 3 3 8l3 5M10 3l3 5-3 5"/>
+          </g>
+          <text data-node-label="" data-detail-anchor="" x="730" y="588" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">containerd</text>
+        <text data-detail="context" x="730" y="604" class="t-muted" font-size="9" text-anchor="middle">컨테이너 실행</text>
         </g>
 
         <g id="node-pod2" data-node-id="pod2" data-node-label="Pod B" tabindex="0" role="button" aria-label="Focus Pod B, 컨테이너 실행 중, cap-node2 · 워커 노드" aria-pressed="false" data-node-kind="backend" data-node-sublabel="컨테이너 실행 중" data-node-context="cap-node2 · 워커 노드">
           <title>Pod B · 컨테이너 실행 중 · cap-node2 · 워커 노드</title>
-          <rect x="680" y="620" width="150" height="64" rx="6" class="c-mask"/>
-          <rect x="680" y="620" width="150" height="64" rx="6" class="c-backend" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(686 626) scale(0.6875)">
+          <rect x="830" y="660" width="150" height="60" rx="6" class="c-mask"/>
+          <rect x="830" y="660" width="150" height="60" rx="6" class="c-backend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(836 666) scale(0.6875)">
             <path d="M6 3 3 8l3 5M10 3l3 5-3 5"/>
           </g>
-          <text data-node-label="" data-detail-anchor="" x="755" y="650" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Pod B</text>
-        <text data-detail="context" x="755" y="666" class="t-muted" font-size="9" text-anchor="middle">컨테이너 실행 중</text>
+          <text data-node-label="" data-detail-anchor="" x="905" y="688" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Pod B</text>
+        <text data-detail="context" x="905" y="704" class="t-muted" font-size="9" text-anchor="middle">컨테이너 실행 중</text>
         </g>
 
         <g id="node-kpx2" data-node-id="kpx2" data-node-label="kube-proxy" tabindex="0" role="button" aria-label="Focus kube-proxy, iptables 규칙 관리, cap-node2 · 워커 노드" aria-pressed="false" data-node-kind="backend" data-node-sublabel="iptables 규칙 관리" data-node-context="cap-node2 · 워커 노드">
           <title>kube-proxy · iptables 규칙 관리 · cap-node2 · 워커 노드</title>
-          <rect x="860" y="620" width="150" height="64" rx="6" class="c-mask"/>
-          <rect x="860" y="620" width="150" height="64" rx="6" class="c-backend" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(866 626) scale(0.6875)">
+          <rect x="880" y="450" width="150" height="60" rx="6" class="c-mask"/>
+          <rect x="880" y="450" width="150" height="60" rx="6" class="c-backend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(886 456) scale(0.6875)">
             <path d="M6 3 3 8l3 5M10 3l3 5-3 5"/>
           </g>
-          <text data-node-label="" data-detail-anchor="" x="935" y="650" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">kube-proxy</text>
-        <text data-detail="context" x="935" y="666" class="t-muted" font-size="9" text-anchor="middle">iptables 규칙 관리</text>
+          <text data-node-label="" data-detail-anchor="" x="955" y="478" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">kube-proxy</text>
+        <text data-detail="context" x="955" y="494" class="t-muted" font-size="9" text-anchor="middle">iptables 규칙 관리</text>
         </g>
 
         <!-- Connection labels -->
@@ -5217,16 +5258,16 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
           <text x="180" y="198" class="t-edge-emphasis" font-size="8" text-anchor="middle">명령 입력</text>
         </g>
         <g data-detail="context" data-edge-from="kubectl" data-edge-to="cp-api" data-edge-label="HTTPS :6443" data-edge-key="1" data-edge-id="kubectl-api">
-          <rect x="378.6" y="208" width="62.8" height="14" rx="3" class="c-mask"/>
-          <text x="410" y="218" class="t-edge-emphasis" font-size="8" text-anchor="middle">HTTPS :6443</text>
+          <rect x="366.6" y="188" width="62.8" height="14" rx="3" class="c-mask"/>
+          <text x="398" y="198" class="t-edge-emphasis" font-size="8" text-anchor="middle">HTTPS :6443</text>
         </g>
         <g data-detail="context" data-edge-from="sched" data-edge-to="cp-api" data-edge-label="배치 결정" data-edge-key="2" data-edge-id="sched-api">
-          <rect x="483.79999999999995" y="160" width="53.199999999999996" height="14" rx="3" class="c-mask"/>
-          <text x="510.4" y="170" class="t-edge-default" font-size="8" text-anchor="middle">배치 결정</text>
+          <rect x="502.4" y="147" width="53.199999999999996" height="14" rx="3" class="c-mask"/>
+          <text x="529" y="157" class="t-edge-default" font-size="8" text-anchor="middle">배치 결정</text>
         </g>
         <g data-detail="context" data-edge-from="cm" data-edge-to="cp-api" data-edge-label="조정 루프" data-edge-key="3" data-edge-id="cm-api">
-          <rect x="621.9" y="147" width="53.199999999999996" height="14" rx="3" class="c-mask"/>
-          <text x="648.5" y="157" class="t-edge-default" font-size="8" text-anchor="middle">조정 루프</text>
+          <rect x="601.9" y="147" width="53.199999999999996" height="14" rx="3" class="c-mask"/>
+          <text x="628.5" y="157" class="t-edge-default" font-size="8" text-anchor="middle">조정 루프</text>
         </g>
         <g data-detail="context" data-edge-from="cp-api" data-edge-to="etcd" data-edge-label="저장/조회" data-edge-key="4" data-edge-id="api-etcd">
           <rect x="653.4" y="228" width="53.199999999999996" height="14" rx="3" class="c-mask"/>
@@ -5240,53 +5281,65 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
           <rect x="646" y="290" width="30" height="14" rx="3" class="c-mask"/>
           <text x="661" y="300" class="t-edge-default" font-size="8" text-anchor="middle">보고</text>
         </g>
-        <g data-detail="context" data-edge-from="kubelet1" data-edge-to="pod1" data-edge-label="실행 지시" data-edge-key="7" data-edge-id="kubelet1-pod1">
-          <rect x="309.9" y="551" width="53.199999999999996" height="14" rx="3" class="c-mask"/>
-          <text x="336.5" y="561" class="t-edge-default" font-size="8" text-anchor="middle">실행 지시</text>
+        <g data-detail="context" data-edge-from="kubelet1" data-edge-to="rt1" data-edge-label="실행 지시" data-edge-key="7" data-edge-id="kubelet1-rt1">
+          <rect x="320.9" y="521" width="53.199999999999996" height="14" rx="3" class="c-mask"/>
+          <text x="347.5" y="531" class="t-edge-default" font-size="8" text-anchor="middle">실행 지시</text>
         </g>
-        <g data-detail="context" data-edge-from="kubelet2" data-edge-to="pod2" data-edge-label="실행 지시" data-edge-key="8" data-edge-id="kubelet2-pod2">
-          <rect x="705.8" y="564" width="53.199999999999996" height="14" rx="3" class="c-mask"/>
-          <text x="732.4" y="574" class="t-edge-default" font-size="8" text-anchor="middle">실행 지시</text>
+        <g data-detail="context" data-edge-from="rt1" data-edge-to="pod1" data-edge-label="컨테이너 생성" data-edge-key="8" data-edge-id="rt1-pod1">
+          <rect x="378.8" y="620" width="72.4" height="14" rx="3" class="c-mask"/>
+          <text x="415" y="630" class="t-edge-dashed" font-size="8" text-anchor="middle">컨테이너 생성</text>
         </g>
-        <g data-detail="context" data-edge-from="pod1" data-edge-to="coredns" data-edge-label="서비스 이름 조회" data-edge-key="9" data-edge-id="pod1-dns">
-          <rect x="390.1" y="590" width="86.8" height="14" rx="3" class="c-mask"/>
-          <text x="433.5" y="600" class="t-edge-default" font-size="8" text-anchor="middle">서비스 이름 조회</text>
+        <g data-detail="context" data-edge-from="kubelet2" data-edge-to="rt2" data-edge-label="실행 지시" data-edge-key="9" data-edge-id="kubelet2-rt2">
+          <rect x="720.9" y="521" width="53.199999999999996" height="14" rx="3" class="c-mask"/>
+          <text x="747.5" y="531" class="t-edge-default" font-size="8" text-anchor="middle">실행 지시</text>
+        </g>
+        <g data-detail="context" data-edge-from="rt2" data-edge-to="pod2" data-edge-label="컨테이너 생성" data-edge-key="10" data-edge-id="rt2-pod2">
+          <rect x="778.8" y="620" width="72.4" height="14" rx="3" class="c-mask"/>
+          <text x="815" y="630" class="t-edge-dashed" font-size="8" text-anchor="middle">컨테이너 생성</text>
+        </g>
+        <g data-detail="context" data-edge-from="pod1" data-edge-to="coredns" data-edge-label="서비스 이름 조회" data-edge-key="11" data-edge-id="pod1-dns">
+          <rect x="481.6" y="521" width="86.8" height="14" rx="3" class="c-mask"/>
+          <text x="525" y="531" class="t-edge-default" font-size="8" text-anchor="middle">서비스 이름 조회</text>
         </g>
 
         <!-- Boundary labels (foreground masks keep routes out of titles) -->
         <g data-graph-role="structural-frame-label" data-composition-frame-id="0" data-composition-frame-kind="region" data-composition-frame-label="cap-master · 컨트롤 플레인">
-          <rect data-graph-role="structural-frame-label-mask" x="444" y="40" width="150.4" height="16" rx="3" class="c-mask"/>
-          <text data-boundary-label="" x="448" y="53" class="t-cloud" font-size="9" font-weight="600">cap-master · 컨트롤 플레인</text>
+          <rect data-graph-role="structural-frame-label-mask" x="414" y="40" width="150.4" height="16" rx="3" class="c-mask"/>
+          <text data-boundary-label="" x="418" y="53" class="t-cloud" font-size="9" font-weight="600">cap-master · 컨트롤 플레인</text>
         </g>
 
         <g data-graph-role="structural-frame-label" data-composition-frame-id="1" data-composition-frame-kind="region" data-composition-frame-label="cap-node1 · 워커 노드">
-          <rect data-graph-role="structural-frame-label-mask" x="214" y="430" width="123.39999999999999" height="16" rx="3" class="c-mask"/>
-          <text data-boundary-label="" x="218" y="443" class="t-cloud" font-size="9" font-weight="600">cap-node1 · 워커 노드</text>
+          <rect data-graph-role="structural-frame-label-mask" x="84" y="430" width="123.39999999999999" height="16" rx="3" class="c-mask"/>
+          <text data-boundary-label="" x="88" y="443" class="t-cloud" font-size="9" font-weight="600">cap-node1 · 워커 노드</text>
         </g>
 
         <g data-graph-role="structural-frame-label" data-composition-frame-id="2" data-composition-frame-kind="region" data-composition-frame-label="cap-node2 · 워커 노드">
-          <rect data-graph-role="structural-frame-label-mask" x="654" y="430" width="123.39999999999999" height="16" rx="3" class="c-mask"/>
-          <text data-boundary-label="" x="658" y="443" class="t-cloud" font-size="9" font-weight="600">cap-node2 · 워커 노드</text>
+          <rect data-graph-role="structural-frame-label-mask" x="634" y="430" width="123.39999999999999" height="16" rx="3" class="c-mask"/>
+          <text data-boundary-label="" x="638" y="443" class="t-cloud" font-size="9" font-weight="600">cap-node2 · 워커 노드</text>
         </g>
 
         <!-- Legend -->
         <g data-legend="" data-legend-bridge="">
-          <text x="40" y="736" class="t-primary" font-size="12" font-weight="650">Legend</text>
-          <g data-legend-semantic-kind="frontend" data-legend-kind="frontend" data-legend-label="클라이언트" data-legend-x="40" data-legend-baseline="756" data-legend-width="93">
-            <rect x="40" y="747" width="16" height="10" rx="2.5" class="c-frontend" stroke-width="1"/>
-            <text x="62" y="756" class="t-muted" font-size="10" font-weight="500">클라이언트</text>
+          <text x="40" y="772" class="t-primary" font-size="12" font-weight="650">Legend</text>
+          <g data-legend-semantic-kind="frontend" data-legend-kind="frontend" data-legend-label="클라이언트" data-legend-x="40" data-legend-baseline="792" data-legend-width="93">
+            <rect x="40" y="783" width="16" height="10" rx="2.5" class="c-frontend" stroke-width="1"/>
+            <text x="62" y="792" class="t-muted" font-size="10" font-weight="500">클라이언트</text>
           </g>
-          <g data-legend-semantic-kind="backend" data-legend-kind="backend" data-legend-label="구성요소" data-legend-x="155" data-legend-baseline="756" data-legend-width="83">
-            <rect x="155" y="747" width="16" height="10" rx="2.5" class="c-backend" stroke-width="1"/>
-            <text x="177" y="756" class="t-muted" font-size="10" font-weight="500">구성요소</text>
+          <g data-legend-semantic-kind="backend" data-legend-kind="backend" data-legend-label="구성요소" data-legend-x="155" data-legend-baseline="792" data-legend-width="83">
+            <rect x="155" y="783" width="16" height="10" rx="2.5" class="c-backend" stroke-width="1"/>
+            <text x="177" y="792" class="t-muted" font-size="10" font-weight="500">구성요소</text>
           </g>
-          <g data-legend-semantic-kind="database" data-legend-kind="database" data-legend-label="상태 저장소" data-legend-x="260" data-legend-baseline="756" data-legend-width="98">
-            <rect x="260" y="747" width="16" height="10" rx="2.5" class="c-database" stroke-width="1"/>
-            <text x="282" y="756" class="t-muted" font-size="10" font-weight="500">상태 저장소</text>
+          <g data-legend-semantic-kind="database" data-legend-kind="database" data-legend-label="상태 저장소" data-legend-x="260" data-legend-baseline="792" data-legend-width="98">
+            <rect x="260" y="783" width="16" height="10" rx="2.5" class="c-database" stroke-width="1"/>
+            <text x="282" y="792" class="t-muted" font-size="10" font-weight="500">상태 저장소</text>
           </g>
-          <g data-legend-semantic-kind="external" data-legend-kind="external" data-legend-label="사람 (사용자)" data-legend-x="380" data-legend-baseline="756" data-legend-width="108">
-            <rect x="380" y="747" width="16" height="10" rx="2.5" class="c-external" stroke-width="1"/>
-            <text x="402" y="756" class="t-muted" font-size="10" font-weight="500">사람 (사용자)</text>
+          <g data-legend-semantic-kind="cloud" data-legend-kind="cloud" data-legend-label="Cloud" data-legend-x="380" data-legend-baseline="792" data-legend-width="68">
+            <rect x="380" y="783" width="16" height="10" rx="2.5" class="c-cloud" stroke-width="1"/>
+            <text x="402" y="792" class="t-muted" font-size="10" font-weight="500">Cloud</text>
+          </g>
+          <g data-legend-semantic-kind="external" data-legend-kind="external" data-legend-label="사람 (사용자)" data-legend-x="470" data-legend-baseline="792" data-legend-width="108">
+            <rect x="470" y="783" width="16" height="10" rx="2.5" class="c-external" stroke-width="1"/>
+            <text x="492" y="792" class="t-muted" font-size="10" font-weight="500">사람 (사용자)</text>
           </g>
         </g>
       </svg>
@@ -5506,12 +5559,12 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
       <div class="card">
         <div class="card-header">
           <div class="card-dot violet"></div>
-          <h3>이 그림에 없는 것</h3>
+          <h3>이 그림의 남은 비밀</h3>
         </div>
         <ul>
-          <li>cloud-controller-manager: LB·볼륨 등 클라우드 연동 담당</li>
-          <li>마스터의 kubelet: 컨트롤 플레인을 Static Pod로 기동</li>
-          <li>containerd가 실제 컨테이너 프로세스를 실행</li>
+          <li>마스터의 kubelet: 컨트롤 플레인도 Pod라, API 서버 없이 매니페스트(/etc/kubernetes/manifests)를 직접 읽어 기동 — Static Pod</li>
+          <li>cloud-controller-manager는 클라우드(AWS)에서만 필요 — 온프레미스면 없음</li>
+          <li>컨트롤 플레인 5종 + CoreDNS는 모두 kube-system 네임스페이스의 Static Pod</li>
         </ul>
       </div>
     </div>
