@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>쿠버네티스 학습 다이어그램</title>
+<style>
+  body { font-family: -apple-system, "Pretendard", "Malgun Gothic", sans-serif; max-width: 720px; margin: 60px auto; padding: 0 24px; color: #1f2937; background: #f9fafb; }
+  h1 { font-size: 1.6rem; border-bottom: 2px solid #e5e7eb; padding-bottom: 12px; }
+  .card { background: #fff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 18px 20px; margin: 16px 0; }
+  .card h2 { margin: 0 0 8px; font-size: 1.05rem; }
+  .card a { color: #2563eb; font-weight: 600; text-decoration: none; }
+  .card a:hover { text-decoration: underline; }
+  .card p { margin: 6px 0 0; color: #6b7280; font-size: .92rem; line-height: 1.5; }
+  footer { margin-top: 40px; color: #9ca3af; font-size: .85rem; }
+</style>
+</head>
+<body>
+<h1>쿠버네티스 학습 다이어그램</h1>
+<p>Archify로 만든 인터랙티브 구조도입니다. <strong>R</strong>(경로 추적), <strong>L</strong>(역할 비교), <strong>T</strong>(테마), <strong>E</strong>(내보내기) 키를 쓸 수 있습니다.</p>
+
+<div class="card">
+  <h2>① 아키텍처 — 애드온 포함 <em>(최신)</em></h2>
+  <a href="architecture.html">architecture.html 열기 →</a>
+  <p>컨트롤 플레인(apiserver · etcd · scheduler · controller-manager · CoreDNS)과 워커 노드(kubelet · Pod · kube-proxy), 그리고 Calico 같은 애드온 구성.</p>
+</div>
+
+<div class="card">
+  <h2>② Pod 생성 8단계 시퀀스</h2>
+  <a href="pod-create-sequence.html">pod-create-sequence.html 열기 →</a>
+  <p>kubectl apply 후 API Server 접수 → 스케줄러 배치 → kubelet 실행 → Running까지의 시간 흐름. ③ created가 '접수'임을 보여준다.</p>
+</div>
+
+<div class="card">
+  <h2>③ 아키텍처 v1 (애드온 없는 첫 버전)</h2>
+  <a href="architecture-v1.html">architecture-v1.html 열기 →</a>
+  <p>애드온 추가 전 버전. 비교용.</p>
+</div>
+
+<footer>운영자 · 쿠버네티스 1일차 학습 자료 · 2026-10-13</footer>
+</body>
+</html>
