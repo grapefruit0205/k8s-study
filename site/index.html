@@ -12,6 +12,10 @@
   .card a { color: #2563eb; font-weight: 600; text-decoration: none; }
   .card a:hover { text-decoration: underline; }
   .card p { margin: 6px 0 0; color: #6b7280; font-size: .92rem; line-height: 1.5; }
+  .group { margin: 34px 0 4px; padding-bottom: 6px; border-bottom: 2px solid #e5e7eb; }
+  .group:first-of-type { margin-top: 20px; }
+  .group h2 { margin: 0; font-size: 1.12rem; color: #111827; }
+  .group p.sub { margin: 4px 0 0; color: #9ca3af; font-size: .85rem; }
   footer { margin-top: 40px; color: #9ca3af; font-size: .85rem; }
 </style>
 </head>
@@ -19,50 +23,74 @@
 <h1>쿠버네티스 학습 다이어그램</h1>
 <p>Archify로 만든 인터랙티브 구조도입니다. <strong>R</strong>(경로 추적), <strong>L</strong>(역할 비교), <strong>T</strong>(테마), <strong>E</strong>(내보내기) 키를 쓸 수 있습니다.</p>
 
+<div class="group">
+  <h2>🐣 1~2교시 — 왜 쿠버네티스인가 · 구조</h2>
+  <p class="sub">Docker는 실행까지, K8s는 유지까지 · 모두 API 서버만 바라본다</p>
+</div>
+
 <div class="card">
-  <h2>⭐ 개념 보충 — 공식 문서 용어로 푼 총정리 <em>(1일차)</em></h2>
+  <h2>⭐ 개념 보충 — 공식 문서 용어로 푼 총정리</h2>
   <a href="concepts.html">concepts.html 열기 →</a>
   <p>왜 쿠버네티스인가, 선언형 vs 명령형, 컨트롤 루프, 컨트롤 플레인 5종, 노드 구성요소, 파드, 레이블·셀렉터, 애드온 — archify 다이어그램이 페이지 안에 바로 떠 있다. 출처: kubernetes.io/ko/docs/concepts.</p>
 </div>
 
 <div class="card">
-  <h2>① 아키텍처 — 애드온 포함 <em>(최신 v3)</em></h2>
+  <h2>아키텍처 — 애드온 포함 <em>(최신 v3)</em></h2>
   <a href="architecture.html">architecture.html 열기 →</a>
   <p>컨트롤 플레인 5종(apiserver · etcd · scheduler · controller-manager · cloud-controller-manager)과 워커 노드(kubelet → containerd → Pod, kube-proxy), CoreDNS·Calico 애드온 구성.</p>
 </div>
 
 <div class="card">
-  <h2>② Pod 생성 8단계 시퀀스</h2>
+  <h2>Pod 생성 8단계 시퀀스</h2>
   <a href="pod-create-sequence.html">pod-create-sequence.html 열기 →</a>
   <p>kubectl apply 후 API Server 접수 → 스케줄러 배치 → kubelet 실행 → Running까지의 시간 흐름. ③ created가 '접수'임을 보여준다.</p>
 </div>
 
+<div class="group">
+  <h2>🧪 3~4교시 — 실습 환경 · kubectl 도구</h2>
+  <p class="sub">minikube 노드는 Docker 컨테이너 · describe의 Events부터 읽는다</p>
+</div>
+
 <div class="card">
-  <h2>③ 3·4교시 — 실습 환경과 kubectl</h2>
+  <h2>3·4교시 정리 — 실습 환경과 kubectl</h2>
   <a href="practice.html">practice.html 열기 →</a>
   <p>minikube 노드가 왜 Docker 컨테이너로 뜨는가, SSH 터널 vs 포트 개방, kubectl 동사 5개, run/create vs apply, describe는 Events부터 읽는다.</p>
 </div>
 
+<div class="group">
+  <h2>🔗 5~6교시 — 라벨 언어 · 오브젝트 사이클</h2>
+  <p class="sub">리소스는 라벨로 잇는다 · apply에서 delete까지</p>
+</div>
+
 <div class="card">
-  <h2>④ 5·6교시 — 라벨 언어와 오브젝트 사이클 <em>(archify 수명주기 포함)</em></h2>
+  <h2>5·6교시 정리 — 라벨 언어와 오브젝트 사이클 <em>(archify 수명주기 포함)</em></h2>
   <a href="lifecycle.html">lifecycle.html 열기 →</a>
   <p>리소스를 라벨로 잇는 언어, apply→delete 한 바퀴, dry-run client vs server, Pending 상태 전이, delete는 선언을 지운다 — archify 수명주기 다이어그램 임베드.</p>
 </div>
 
 <div class="card">
-  <h2>⑤ 7교시 — Docker를 K8s로 번역하기</h2>
-  <a href="docker-map.html">docker-map.html 열기 →</a>
-  <p>개념 매핑 표(컨테이너→Pod, --scale→ReplicaSet, DNS→Service, 볼륨→PV/PVC), 번역에서 사라지는 두 키(build:, depends_on), K8s에 stop이 없다는 것 — 증상별 첫 수까지.</p>
-</div>
-
-<div class="card">
-  <h2>⑥ 오브젝트 수명주기 다이어그램 (단독)</h2>
+  <h2>오브젝트 수명주기 다이어그램 (단독)</h2>
   <a href="pod-lifecycle.html">pod-lifecycle.html 열기 →</a>
   <p>선언 → 스케줄 → Running → 상태 비교 → 안정, 파드 죽음 → 재스케줄 복귀, 롤링 업데이트, 삭제까지의 수명주기.</p>
 </div>
 
+<div class="group">
+  <h2>🗺️ 7교시 — Docker → K8s 번역</h2>
+  <p class="sub">모든 개념은 Docker의 확장이다</p>
+</div>
+
 <div class="card">
-  <h2>⑦ 아키텍처 v1 (애드온 없는 첫 버전)</h2>
+  <h2>7교시 정리 — Docker를 K8s로 번역하기</h2>
+  <a href="docker-map.html">docker-map.html 열기 →</a>
+  <p>개념 매핑 표(컨테이너→Pod, --scale→ReplicaSet, DNS→Service, 볼륨→PV/PVC), 번역에서 사라지는 두 키(build:, depends_on), K8s에 stop이 없다는 것 — 증상별 첫 수까지.</p>
+</div>
+
+<div class="group">
+  <h2>📎 비교용 — 이전 버전</h2>
+</div>
+
+<div class="card">
+  <h2>아키텍처 v1 (애드온 없는 첫 버전)</h2>
   <a href="architecture-v1.html">architecture-v1.html 열기 →</a>
   <p>애드온 추가 전 버전. 비교용.</p>
 </div>
