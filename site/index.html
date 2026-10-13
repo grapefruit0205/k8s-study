@@ -38,7 +38,31 @@
 </div>
 
 <div class="card">
-  <h2>③ 아키텍처 v1 (애드온 없는 첫 버전)</h2>
+  <h2>③ 3·4교시 — 실습 환경과 kubectl</h2>
+  <a href="practice.html">practice.html 열기 →</a>
+  <p>minikube 노드가 왜 Docker 컨테이너로 뜨는가, SSH 터널 vs 포트 개방, kubectl 동사 5개, run/create vs apply, describe는 Events부터 읽는다.</p>
+</div>
+
+<div class="card">
+  <h2>④ 5·6교시 — 라벨 언어와 오브젝트 사이클 <em>(archify 수명주기 포함)</em></h2>
+  <a href="lifecycle.html">lifecycle.html 열기 →</a>
+  <p>리소스를 라벨로 잇는 언어, apply→delete 한 바퀴, dry-run client vs server, Pending 상태 전이, delete는 선언을 지운다 — archify 수명주기 다이어그램 임베드.</p>
+</div>
+
+<div class="card">
+  <h2>⑤ 7교시 — Docker를 K8s로 번역하기</h2>
+  <a href="docker-map.html">docker-map.html 열기 →</a>
+  <p>개념 매핑 표(컨테이너→Pod, --scale→ReplicaSet, DNS→Service, 볼륨→PV/PVC), 번역에서 사라지는 두 키(build:, depends_on), K8s에 stop이 없다는 것 — 증상별 첫 수까지.</p>
+</div>
+
+<div class="card">
+  <h2>⑥ 오브젝트 수명주기 다이어그램 (단독)</h2>
+  <a href="pod-lifecycle.html">pod-lifecycle.html 열기 →</a>
+  <p>선언 → 스케줄 → Running → 상태 비교 → 안정, 파드 죽음 → 재스케줄 복귀, 롤링 업데이트, 삭제까지의 수명주기.</p>
+</div>
+
+<div class="card">
+  <h2>⑦ 아키텍처 v1 (애드온 없는 첫 버전)</h2>
   <a href="architecture-v1.html">architecture-v1.html 열기 →</a>
   <p>애드온 추가 전 버전. 비교용.</p>
 </div>
