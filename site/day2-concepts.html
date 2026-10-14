@@ -726,6 +726,36 @@ table.am-mark { background: none; }
 @media print { .am-remark-pop { display: none !important; } }
 
 
+/* New-version button and popover (src/render.js adds this file only to a page that has the button). The popover sits under the
+   toolbar and stays hidden unless open, so a browser without native popovers never shows it. */
+.am-btn--update { color: var(--ok); border-color: var(--ok); white-space: nowrap; }
+.am-update { display: none; }
+.am-update:popover-open {
+  display: block; position: fixed; inset-block: 52px auto; inset-inline: auto 12px; margin: 0; width: min(380px, calc(100vw - 24px));
+  padding: 14px 16px; font-size: 13px; color: var(--ink); background: var(--paper);
+  border: 1px solid var(--line-2); border-radius: var(--radius); box-shadow: 0 12px 40px rgba(0,0,0,.25);
+}
+.am-update p { margin: 0 0 8px; }
+.am-update-title { font-weight: 600; color: var(--ok); }
+.am-update-label { color: var(--ink-2); font-size: 12px; }
+.am-update-notes { margin: 0 0 12px; padding-inline-start: 18px; }
+.am-update-notes li { margin: 2px 0; }
+.am-update-notes code { font-size: 12px; }
+.am-update-row { display: flex; align-items: center; gap: 8px; margin: 0 0 12px; }
+.am-update-row > :first-child {
+  flex: 1; min-width: 0; overflow-x: auto; white-space: nowrap; font-size: 12px; padding: 6px 8px;
+  background: var(--bg); border: 1px solid var(--line); border-radius: var(--radius);
+}
+.am-update a { color: var(--accent); font-size: 12px; }
+/* A phone has no room for the words: the button keeps only its dot, and its aria-label still names the version. */
+@media (max-width: 760px) {
+  .am-btn--update .am-update-text { display: none; }
+}
+@media print {
+  .am-update { display: none !important; }
+}
+
+
 html[data-theme="blueprint"] .am-frame { border: 1px solid var(--line); padding: 30px; }
 html[data-theme="blueprint"] .am-frame::before {
   content: ""; position: absolute; inset: 18px; border: 1px solid var(--line); pointer-events: none;
@@ -754,17 +784,29 @@ html[data-theme="paper"] .am-md table { font-family: var(--font-sans); }
 </head>
 <body>
 <div class="am-toolbar" data-am-root-lang="ko" data-am-root-theme="blueprint" data-am-root-mode="auto" data-am-root-style="80">
+<button class="am-btn am-btn--update" type="button" data-am="update" popovertarget="am-update" aria-label="New version 0.5.2" hidden>● <span class="am-update-text">New version <bdi>0.5.2</bdi></span></button>
 <label class="am-pick">Theme<select data-am="theme"><option value="blueprint" selected>Blueprint</option><option value="shadcn">Cards</option><option value="paper">Paper</option></select></label>
 <label class="am-pick">Mode<select data-am="mode"><option value="auto" selected>Auto</option><option value="light">Light</option><option value="dark">Dark</option></select></label>
 <button class="am-btn am-btn--reply" type="button" data-am="reply" data-ui="{&quot;button&quot;:&quot;Reply&quot;,&quot;comment&quot;:&quot;Comment&quot;,&quot;commentHint&quot;:&quot;Your comment on this panel&quot;,&quot;title&quot;:&quot;Your reply&quot;,&quot;hint&quot;:&quot;Copy it and paste it into the chat.&quot;,&quot;copy&quot;:&quot;Copy reply&quot;,&quot;close&quot;:&quot;Close&quot;,&quot;suggested&quot;:&quot;suggested&quot;,&quot;empty&quot;:&quot;Pick options, or comment on a panel first.&quot;,&quot;decisions&quot;:&quot;Decisions&quot;,&quot;comments&quot;:&quot;Comments&quot;,&quot;confirmed&quot;:&quot;suggestion confirmed&quot;,&quot;untouched&quot;:&quot;not answered; suggestion kept&quot;,&quot;was&quot;:&quot;was&quot;,&quot;typed&quot;:&quot;Lines that start with \&quot;&gt;\&quot; are text the reader typed.&quot;,&quot;done&quot;:&quot;Copied ✓&quot;,&quot;remarks&quot;:&quot;Remarks&quot;,&quot;kinds&quot;:{&quot;suggestion&quot;:&quot;suggestion&quot;,&quot;keep&quot;:&quot;keep&quot;,&quot;question&quot;:&quot;question&quot;,&quot;concern&quot;:&quot;concern&quot;}}">Reply</button>
 <button class="am-btn am-btn--remark" type="button" data-am="remark" data-ui="{&quot;button&quot;:&quot;Remark&quot;,&quot;hint&quot;:&quot;Optional note&quot;,&quot;save&quot;:&quot;Save&quot;,&quot;remove&quot;:&quot;Remove&quot;,&quot;section&quot;:&quot;Remarks&quot;,&quot;kinds&quot;:{&quot;suggestion&quot;:&quot;suggestion&quot;,&quot;keep&quot;:&quot;keep&quot;,&quot;question&quot;:&quot;question&quot;,&quot;concern&quot;:&quot;concern&quot;}}">Remark</button>
 <button class="am-btn" type="button" data-am="copy" data-done="Copied ✓">Copy source</button>
 </div>
+<div class="am-update" id="am-update" popover>
+<p class="am-update-title">New version <bdi>0.5.2</bdi></p>
+<p>You have <bdi>0.5.1</bdi>. Found when this page was made.</p>
+<p class="am-update-label">What&#39;s new:</p>
+<ul class="am-update-notes"><li>Install as a DeepSeek Harness plugin: <code>dsh plugin add</code></li><li>In DeepSeek Harness, open the page from a card in the sidebar</li><li>Remark mode: marks on a timeline stay when the window width changes</li></ul>
+<p class="am-update-label">Run in a terminal:</p>
+<div class="am-update-row"><code dir="ltr">npx skills update answer-me-with-html -y</code><button class="am-btn" type="button" data-am="copy-text" data-text="npx skills update answer-me-with-html -y" data-done="Copied ✓">Copy</button></div>
+<p class="am-update-label">Or tell your agent:</p>
+<div class="am-update-row"><span>Update answer-me-with-html</span><button class="am-btn" type="button" data-am="copy-text" data-text="Update answer-me-with-html" data-done="Copied ✓">Copy</button></div>
+<a href="https://github.com/QingYunA/answer-me-with-html/releases" target="_blank" rel="noopener">See what&#39;s new</a>
+</div>
 <main class="am-doc">
-<header class="am-head"><p class="am-colophon">Generated by <a href="https://github.com/QingYunA/answer-me-with-html" target="_blank" rel="noopener">Answer me with HTML</a> 0.5.1 · 2026-10-14 09:39 · <a href="https://github.com/QingYunA/answer-me-with-html" target="_blank" rel="noopener">★ Star on GitHub</a></p><h1>쿠버네티스 1~2교시 — Pod 개념과 생성</h1><p class="am-sub">왜 컨테이너가 아니라 Pod인가 · manifest 해부와 이미지 주소</p><div class="am-head-meta"><span><b>source</b>Notion Day 2 · 2일차 이론</span></div><div class="am-intro am-md"><div class="am-md"><p>2일차의 출발점이다. 1일차가 클러스터를 세웠다면, 오늘은 그 위에 <strong>컨테이너 하나를 쿠버네티스 방식으로 다루는 법</strong>을 배운다. 1교시는 &quot;왜 Pod인가&quot;, 2교시는 &quot;Pod를 어떻게 선언하고 띄우나&quot;다.</p>
+<header class="am-head"><p class="am-colophon">Generated by <a href="https://github.com/QingYunA/answer-me-with-html" target="_blank" rel="noopener">Answer me with HTML</a> 0.5.1 · 2026-10-14 11:42 · <a href="https://github.com/QingYunA/answer-me-with-html" target="_blank" rel="noopener">★ Star on GitHub</a></p><h1>쿠버네티스 1~2교시 — Pod 개념과 생성</h1><p class="am-sub">왜 컨테이너가 아니라 Pod인가 · manifest 해부와 이미지 주소</p><div class="am-head-meta"><span><b>source</b>Notion Day 2 · 2일차 이론</span></div><div class="am-intro am-md"><div class="am-md"><p>2일차의 출발점이다. 1일차가 클러스터를 세웠다면, 오늘은 그 위에 <strong>컨테이너 하나를 쿠버네티스 방식으로 다루는 법</strong>을 배운다. 1교시는 &quot;왜 Pod인가&quot;, 2교시는 &quot;Pod를 어떻게 선언하고 띄우나&quot;다.</p>
 </div></div></header>
 <div class="am-doc-layout">
-<nav class="am-toc" aria-label="Contents"><a href="#panel-A">A · 1교시 · Pod = 함께 살고 함께 죽는 컨테이너 묶음</a><a href="#panel-B">B · 1교시 · pause 컨테이너 — 보이지 않는 자리 지키기</a><a href="#panel-C">C · 1교시 · 무엇을 한 Pod에 넣고, 무엇을 나눌 것인가</a><a href="#panel-D">D · 1교시 · Pod는 일회용이다 — phase와 재시작 규칙</a><a href="#panel-E">E · 2교시 · shop-api manifest 해부</a><a href="#panel-F">F · 2교시 · 떠 있는 Pod를 고쳐도 되는가 — kubectl edit의 한계</a><a href="#panel-G">G · 2교시 · kind에 맞는 apiVersion 찾기</a><a href="#panel-H">H · 2교시 · 이미지 주소 읽는 법</a><a href="#panel-I">I · 2교시 · 네임스페이스 — 클러스터 안의 구역</a><a href="#panel-J">J · 아래 그림 읽는 법 — Pod 해부도</a><a href="#panel-K">K · 2일차 경고 — 오늘 쇼핑몰이 &quot;API 연결 실패&quot;로 뜨는 이유</a></nav><div class="am-doc-body">
+<nav class="am-toc" aria-label="Contents"><a href="#panel-A">A · 1교시 · Pod = 함께 살고 함께 죽는 컨테이너 묶음</a><a href="#panel-B">B · 1교시 · pause 컨테이너 — 보이지 않는 자리 지키기</a><a href="#panel-C">C · 1교시 · 무엇을 한 Pod에 넣고, 무엇을 나눌 것인가</a><a href="#panel-D">D · 1교시 · Pod는 일회용이다 — phase와 재시작 규칙</a><a href="#panel-E">E · 2교시 · shop-api manifest 해부</a><a href="#panel-F">F · 2교시 · 떠 있는 Pod를 고쳐도 되는가 — kubectl edit의 한계</a><a href="#panel-G">G · 2교시 · kind에 맞는 apiVersion 찾기</a><a href="#panel-H">H · 2교시 · 이미지 주소 읽는 법</a><a href="#panel-I">I · 2교시 · 네임스페이스 — 클러스터 안의 구역</a><a href="#panel-J">J · 아래 그림 읽는 법 — Pod 해부도</a><a href="#panel-K">K · 이 페이지에서 쓴 명령어 정리</a><a href="#panel-L">L · 다음 페이지</a><a href="#panel-M">M · 2일차 경고 — 오늘 쇼핑몰이 &quot;API 연결 실패&quot;로 뜨는 이유</a></nav><div class="am-doc-body">
 <section class="am-panel" id="panel-A">
 <header class="am-panel-head"><span class="am-panel-id">A</span><h2>1교시 · Pod = 함께 살고 함께 죽는 컨테이너 묶음</h2></header>
 <div class="am-panel-body"><div class="am-md"><p>도커에서는 컨테이너가 최소 단위였다. 그런데 nginx와 로그 수집기처럼 <strong>같은 파일을 주고받으며 항상 붙어 다녀야 하는 둘</strong>은 어떻게 다룰까?</p>
@@ -993,7 +1035,88 @@ html[data-theme="paper"] .am-md table { font-family: var(--font-sans); }
 </div></div>
 </section>
 <section class="am-panel" id="panel-K">
-<header class="am-panel-head"><span class="am-panel-id">K</span><h2>2일차 경고 — 오늘 쇼핑몰이 &quot;API 연결 실패&quot;로 뜨는 이유</h2></header>
+<header class="am-panel-head"><span class="am-panel-id">K</span><h2>이 페이지에서 쓴 명령어 정리</h2></header>
+<div class="am-panel-body"><div class="am-md"><div class="am-table-wrap"><table>
+<thead>
+<tr>
+<th>명령어</th>
+<th>하는 일</th>
+<th>메모</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>kubectl api-resources</code></td>
+<td>이 클러스터가 아는 리소스(kind) 전체 목록</td>
+<td>APIVERSION 열 값이 manifest의 apiVersion이 된다. SHORTNAMES(deploy 등)는 명령어용일 뿐</td>
+</tr>
+<tr>
+<td><code>kubectl explain &lt;kind&gt;</code></td>
+<td>한 kind의 apiVersion과 필드 구조를 보여 줌</td>
+<td>GROUP·VERSION 합쳐 apiVersion 재구성. 필드 뜻까지 보여 줘 YAML 쓸 때 가장 빠름</td>
+</tr>
+<tr>
+<td><code>kubectl api-versions</code></td>
+<td>이 클러스터가 지원하는 API 그룹 목록</td>
+<td>여기 없는 그룹을 쓰면 <code>no matches for kind</code> 오류</td>
+</tr>
+<tr>
+<td><code>kubectl create namespace shop</code></td>
+<td>shop 네임스페이스 생성 (명령형)</td>
+<td>YAML 없이 즉시. Git에 기록이 남지 않아 학습 이후엔 manifest 권장</td>
+</tr>
+<tr>
+<td><code>kubectl apply -f 00-namespace.yaml</code></td>
+<td>네임스페이스를 선언 파일로 생성 (선언형)</td>
+<td>파일이 Git에 남아 재현 가능. 1일차 명령형/선언형 차이 그대로</td>
+</tr>
+<tr>
+<td><code>kubectl apply -f shop-api.yaml</code></td>
+<td>manifest로 Pod 생성</td>
+<td><code>spec: Forbidden ...</code> 오류시 떠 있는 Pod 필드 수정 시도가 원인 — delete 후 apply</td>
+</tr>
+<tr>
+<td><code>kubectl get pods -n shop</code></td>
+<td>shop 구역의 Pod 목록</td>
+<td><code>-n</code> 생략하면 default를 봐서 &quot;Pod가 없다&quot;고 착각하기 쉬움</td>
+</tr>
+<tr>
+<td><code>kubectl get pods -A</code></td>
+<td>모든 네임스페이스의 Pod 목록</td>
+<td>어느 구역에 무엇이 떴는지 한눈에. 디버깅 첫 수</td>
+</tr>
+<tr>
+<td><code>kubectl describe pod shop-api -n shop</code></td>
+<td>Pod의 상세 상태와 Events</td>
+<td>Events 아래부터 읽는 습관 — 1일차 4교시 그대로</td>
+</tr>
+<tr>
+<td><code>kubectl delete pod shop-api -n shop</code></td>
+<td>Pod 삭제</td>
+<td>파드는 되살아나지 않는다. 컨트롤러(Pod면 직접, Deployment면 새로)가 다시 만든다</td>
+</tr>
+<tr>
+<td><code>kubectl edit pod shop-api -n shop</code></td>
+<td>떠 있는 Pod의 제한된 필드만 수정</td>
+<td>바꿀 수 있는 건 image·labels 정도. 나머지는 Forbidden. 급할 때 쓰고 파일도 고치기</td>
+</tr>
+<tr>
+<td><code>kubectl config set-context --current --namespace=shop</code></td>
+<td>현재 컨텍스트의 기본 네임스페이스를 shop으로</td>
+<td>편하지만 kubeconfig에만 저장돼 오적용 사고가 잦다. 실습은 -n shop 유지</td>
+</tr>
+</tbody></table></div>
+</div></div>
+</section>
+<section class="am-panel" id="panel-L">
+<header class="am-panel-head"><span class="am-panel-id">L</span><h2>다음 페이지</h2></header>
+<div class="am-panel-body"><div class="am-md"><ul>
+<li>3~5교시 — 멀티 컨테이너와 command·env → <a href="day2-patterns.html">day2-patterns.html</a></li>
+<li>6~8교시 — ConfigMap·Secret과 Label → <a href="day2-config.html">day2-config.html</a></li>
+</ul>
+</div></div>
+</section>
+<section class="am-panel" id="panel-M">
+<header class="am-panel-head"><span class="am-panel-id">M</span><h2>2일차 경고 — 오늘 쇼핑몰이 &quot;API 연결 실패&quot;로 뜨는 이유</h2></header>
 <div class="am-panel-body"><div class="am-md"><p>오늘 브라우저로 쇼핑몰을 열면 &quot;API 연결 실패&quot;가 뜨는 것이 <strong>정상</strong>이다. 화면(shop-web)과 API(shop-api)를 이어 줄 Service를 아직 배우지 않았기 때문이다. 4일차에서 연결된다.</p>
 </div></div>
 </section>
@@ -1180,6 +1303,28 @@ archify 다이어그램이 이 페이지 안에 임혀 있다.
 - **카드 3장**: 공유·비공유, 실행 순서, READY 표기. 1교시 개념이 그대로 그림에 대응된다.
 
 iframe 안을 한 번 클릭하면 노드 클릭, R(경로 추적), T(테마) 등 인터랙티브 기능이 작동한다.
+
+## 이 페이지에서 쓴 명령어 정리
+
+| 명령어 | 하는 일 | 메모 |
+|---|---|---|
+| `kubectl api-resources` | 이 클러스터가 아는 리소스(kind) 전체 목록 | APIVERSION 열 값이 manifest의 apiVersion이 된다. SHORTNAMES(deploy 등)는 명령어용일 뿐 |
+| `kubectl explain &lt;kind&gt;` | 한 kind의 apiVersion과 필드 구조를 보여 줌 | GROUP·VERSION 합쳐 apiVersion 재구성. 필드 뜻까지 보여 줘 YAML 쓸 때 가장 빠름 |
+| `kubectl api-versions` | 이 클러스터가 지원하는 API 그룹 목록 | 여기 없는 그룹을 쓰면 `no matches for kind` 오류 |
+| `kubectl create namespace shop` | shop 네임스페이스 생성 (명령형) | YAML 없이 즉시. Git에 기록이 남지 않아 학습 이후엔 manifest 권장 |
+| `kubectl apply -f 00-namespace.yaml` | 네임스페이스를 선언 파일로 생성 (선언형) | 파일이 Git에 남아 재현 가능. 1일차 명령형/선언형 차이 그대로 |
+| `kubectl apply -f shop-api.yaml` | manifest로 Pod 생성 | `spec: Forbidden ...` 오류시 떠 있는 Pod 필드 수정 시도가 원인 — delete 후 apply |
+| `kubectl get pods -n shop` | shop 구역의 Pod 목록 | `-n` 생략하면 default를 봐서 &quot;Pod가 없다&quot;고 착각하기 쉬움 |
+| `kubectl get pods -A` | 모든 네임스페이스의 Pod 목록 | 어느 구역에 무엇이 떴는지 한눈에. 디버깅 첫 수 |
+| `kubectl describe pod shop-api -n shop` | Pod의 상세 상태와 Events | Events 아래부터 읽는 습관 — 1일차 4교시 그대로 |
+| `kubectl delete pod shop-api -n shop` | Pod 삭제 | 파드는 되살아나지 않는다. 컨트롤러(Pod면 직접, Deployment면 새로)가 다시 만든다 |
+| `kubectl edit pod shop-api -n shop` | 떠 있는 Pod의 제한된 필드만 수정 | 바꿀 수 있는 건 image·labels 정도. 나머지는 Forbidden. 급할 때 쓰고 파일도 고치기 |
+| `kubectl config set-context --current --namespace=shop` | 현재 컨텍스트의 기본 네임스페이스를 shop으로 | 편하지만 kubeconfig에만 저장돼 오적용 사고가 잦다. 실습은 -n shop 유지 |
+
+## 다음 페이지
+
+- 3~5교시 — 멀티 컨테이너와 command·env → [day2-patterns.html](day2-patterns.html)
+- 6~8교시 — ConfigMap·Secret과 Label → [day2-config.html](day2-config.html)
 
 ## 2일차 경고 — 오늘 쇼핑몰이 &quot;API 연결 실패&quot;로 뜨는 이유
 
@@ -2278,6 +2423,27 @@ if (panels.length > 1) {
   document.querySelector('[data-am="theme"]')?.addEventListener('click', later);
 }
 })();
+})();
+// Pages with a new-version button only: src/render.js adds this script after the page script.
+// The button shows where the browser has native popovers (they open and close the popover with no script). A page that am serve
+// sends to another device has no button (src/serve.js), so this script does not look at the address.
+(() => {
+  const button = document.querySelector('[data-am="update"]');
+  if (!button || !Object.hasOwn(HTMLElement.prototype, 'popover')) return;
+  button.hidden = false;
+  // Each copy button copies its data-text and reads data-done for a moment.
+  for (const copy of document.querySelectorAll('[data-am="copy-text"]')) {
+    copy.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(copy.dataset.text);
+      } catch {
+        return;
+      }
+      const label = copy.textContent;
+      copy.textContent = copy.dataset.done;
+      setTimeout(() => { copy.textContent = label; }, 1400);
+    });
+  }
 })();
 </script>
 </body>

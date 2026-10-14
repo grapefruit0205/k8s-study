@@ -726,6 +726,36 @@ table.am-mark { background: none; }
 @media print { .am-remark-pop { display: none !important; } }
 
 
+/* New-version button and popover (src/render.js adds this file only to a page that has the button). The popover sits under the
+   toolbar and stays hidden unless open, so a browser without native popovers never shows it. */
+.am-btn--update { color: var(--ok); border-color: var(--ok); white-space: nowrap; }
+.am-update { display: none; }
+.am-update:popover-open {
+  display: block; position: fixed; inset-block: 52px auto; inset-inline: auto 12px; margin: 0; width: min(380px, calc(100vw - 24px));
+  padding: 14px 16px; font-size: 13px; color: var(--ink); background: var(--paper);
+  border: 1px solid var(--line-2); border-radius: var(--radius); box-shadow: 0 12px 40px rgba(0,0,0,.25);
+}
+.am-update p { margin: 0 0 8px; }
+.am-update-title { font-weight: 600; color: var(--ok); }
+.am-update-label { color: var(--ink-2); font-size: 12px; }
+.am-update-notes { margin: 0 0 12px; padding-inline-start: 18px; }
+.am-update-notes li { margin: 2px 0; }
+.am-update-notes code { font-size: 12px; }
+.am-update-row { display: flex; align-items: center; gap: 8px; margin: 0 0 12px; }
+.am-update-row > :first-child {
+  flex: 1; min-width: 0; overflow-x: auto; white-space: nowrap; font-size: 12px; padding: 6px 8px;
+  background: var(--bg); border: 1px solid var(--line); border-radius: var(--radius);
+}
+.am-update a { color: var(--accent); font-size: 12px; }
+/* A phone has no room for the words: the button keeps only its dot, and its aria-label still names the version. */
+@media (max-width: 760px) {
+  .am-btn--update .am-update-text { display: none; }
+}
+@media print {
+  .am-update { display: none !important; }
+}
+
+
 html[data-theme="blueprint"] .am-frame { border: 1px solid var(--line); padding: 30px; }
 html[data-theme="blueprint"] .am-frame::before {
   content: ""; position: absolute; inset: 18px; border: 1px solid var(--line); pointer-events: none;
@@ -754,17 +784,29 @@ html[data-theme="paper"] .am-md table { font-family: var(--font-sans); }
 </head>
 <body>
 <div class="am-toolbar" data-am-root-lang="ko" data-am-root-theme="blueprint" data-am-root-mode="auto" data-am-root-style="80">
+<button class="am-btn am-btn--update" type="button" data-am="update" popovertarget="am-update" aria-label="New version 0.5.2" hidden>● <span class="am-update-text">New version <bdi>0.5.2</bdi></span></button>
 <label class="am-pick">Theme<select data-am="theme"><option value="blueprint" selected>Blueprint</option><option value="shadcn">Cards</option><option value="paper">Paper</option></select></label>
 <label class="am-pick">Mode<select data-am="mode"><option value="auto" selected>Auto</option><option value="light">Light</option><option value="dark">Dark</option></select></label>
 <button class="am-btn am-btn--reply" type="button" data-am="reply" data-ui="{&quot;button&quot;:&quot;Reply&quot;,&quot;comment&quot;:&quot;Comment&quot;,&quot;commentHint&quot;:&quot;Your comment on this panel&quot;,&quot;title&quot;:&quot;Your reply&quot;,&quot;hint&quot;:&quot;Copy it and paste it into the chat.&quot;,&quot;copy&quot;:&quot;Copy reply&quot;,&quot;close&quot;:&quot;Close&quot;,&quot;suggested&quot;:&quot;suggested&quot;,&quot;empty&quot;:&quot;Pick options, or comment on a panel first.&quot;,&quot;decisions&quot;:&quot;Decisions&quot;,&quot;comments&quot;:&quot;Comments&quot;,&quot;confirmed&quot;:&quot;suggestion confirmed&quot;,&quot;untouched&quot;:&quot;not answered; suggestion kept&quot;,&quot;was&quot;:&quot;was&quot;,&quot;typed&quot;:&quot;Lines that start with \&quot;&gt;\&quot; are text the reader typed.&quot;,&quot;done&quot;:&quot;Copied ✓&quot;,&quot;remarks&quot;:&quot;Remarks&quot;,&quot;kinds&quot;:{&quot;suggestion&quot;:&quot;suggestion&quot;,&quot;keep&quot;:&quot;keep&quot;,&quot;question&quot;:&quot;question&quot;,&quot;concern&quot;:&quot;concern&quot;}}">Reply</button>
 <button class="am-btn am-btn--remark" type="button" data-am="remark" data-ui="{&quot;button&quot;:&quot;Remark&quot;,&quot;hint&quot;:&quot;Optional note&quot;,&quot;save&quot;:&quot;Save&quot;,&quot;remove&quot;:&quot;Remove&quot;,&quot;section&quot;:&quot;Remarks&quot;,&quot;kinds&quot;:{&quot;suggestion&quot;:&quot;suggestion&quot;,&quot;keep&quot;:&quot;keep&quot;,&quot;question&quot;:&quot;question&quot;,&quot;concern&quot;:&quot;concern&quot;}}">Remark</button>
 <button class="am-btn" type="button" data-am="copy" data-done="Copied ✓">Copy source</button>
 </div>
+<div class="am-update" id="am-update" popover>
+<p class="am-update-title">New version <bdi>0.5.2</bdi></p>
+<p>You have <bdi>0.5.1</bdi>. Found when this page was made.</p>
+<p class="am-update-label">What&#39;s new:</p>
+<ul class="am-update-notes"><li>Install as a DeepSeek Harness plugin: <code>dsh plugin add</code></li><li>In DeepSeek Harness, open the page from a card in the sidebar</li><li>Remark mode: marks on a timeline stay when the window width changes</li></ul>
+<p class="am-update-label">Run in a terminal:</p>
+<div class="am-update-row"><code dir="ltr">npx skills update answer-me-with-html -y</code><button class="am-btn" type="button" data-am="copy-text" data-text="npx skills update answer-me-with-html -y" data-done="Copied ✓">Copy</button></div>
+<p class="am-update-label">Or tell your agent:</p>
+<div class="am-update-row"><span>Update answer-me-with-html</span><button class="am-btn" type="button" data-am="copy-text" data-text="Update answer-me-with-html" data-done="Copied ✓">Copy</button></div>
+<a href="https://github.com/QingYunA/answer-me-with-html/releases" target="_blank" rel="noopener">See what&#39;s new</a>
+</div>
 <main class="am-doc">
-<header class="am-head"><p class="am-colophon">Generated by <a href="https://github.com/QingYunA/answer-me-with-html" target="_blank" rel="noopener">Answer me with HTML</a> 0.5.1 · 2026-10-14 09:39 · <a href="https://github.com/QingYunA/answer-me-with-html" target="_blank" rel="noopener">★ Star on GitHub</a></p><h1>쿠버네티스 2일차 6~8교시 — ConfigMap·Secret과 Label·Annotation</h1><p class="am-sub">설정 분리 · 갱신 반영 표 · Secret 4타입 · 라벨 설계와 어노테이션</p><div class="am-head-meta"><span><b>source</b>Notion Day 2 · 2일차 이론</span></div><div class="am-intro am-md"><div class="am-md"><p>설정과 라벨이다. 6교시는 &quot;이미지에서 설정을 떼어낸다&quot;, 7교시는 &quot;리소스에 이름표를 단다&quot;, 8교시는 심화·정리다.</p>
+<header class="am-head"><p class="am-colophon">Generated by <a href="https://github.com/QingYunA/answer-me-with-html" target="_blank" rel="noopener">Answer me with HTML</a> 0.5.1 · 2026-10-14 11:42 · <a href="https://github.com/QingYunA/answer-me-with-html" target="_blank" rel="noopener">★ Star on GitHub</a></p><h1>쿠버네티스 2일차 6~8교시 — ConfigMap·Secret과 Label·Annotation</h1><p class="am-sub">설정 분리 · 갱신 반영 표 · Secret 4타입 · 라벨 설계와 어노테이션</p><div class="am-head-meta"><span><b>source</b>Notion Day 2 · 2일차 이론</span></div><div class="am-intro am-md"><div class="am-md"><p>설정과 라벨이다. 6교시는 &quot;이미지에서 설정을 떼어낸다&quot;, 7교시는 &quot;리소스에 이름표를 단다&quot;, 8교시는 심화·정리다.</p>
 </div></div></header>
 <div class="am-doc-layout">
-<nav class="am-toc" aria-label="Contents"><a href="#panel-A">A · 6교시 · 왜 설정을 분리하는가</a><a href="#panel-B">B · 6교시 · 소비 방식에 따라 갱신 반영이 다르다 — 가장 중요한 표</a><a href="#panel-C">C · 6교시 · ConfigMap에 무엇을 담을 수 있나</a><a href="#panel-D">D · 6교시 · 일부 키만 꺼내 쓰기 — items와 퍼미션</a><a href="#panel-E">E · 6교시 · Secret은 암호화가 아니다</a><a href="#panel-F">F · 6교시 · immutable ConfigMap과 Secret</a><a href="#panel-G">G · 7교시 · 셀렉터 두 종류와 shop의 라벨 체계</a><a href="#panel-H">H · 7교시 · 어노테이션과의 차이</a><a href="#panel-I">I · 8교시 · 핵심 10문장</a></nav><div class="am-doc-body">
+<nav class="am-toc" aria-label="Contents"><a href="#panel-A">A · 6교시 · 왜 설정을 분리하는가</a><a href="#panel-B">B · 6교시 · 소비 방식에 따라 갱신 반영이 다르다 — 가장 중요한 표</a><a href="#panel-C">C · 6교시 · ConfigMap에 무엇을 담을 수 있나</a><a href="#panel-D">D · 6교시 · 일부 키만 꺼내 쓰기 — items와 퍼미션</a><a href="#panel-E">E · 6교시 · Secret은 암호화가 아니다</a><a href="#panel-F">F · 6교시 · immutable ConfigMap과 Secret</a><a href="#panel-G">G · 7교시 · 셀렉터 두 종류와 shop의 라벨 체계</a><a href="#panel-H">H · 7교시 · 어노테이션과의 차이</a><a href="#panel-I">I · 8교시 · 핵심 10문장</a><a href="#panel-J">J · 이 페이지에서 쓴 명령어 정리</a><a href="#panel-K">K · 다음 페이지</a></nav><div class="am-doc-body">
 <section class="am-panel" id="panel-A">
 <header class="am-panel-head"><span class="am-panel-id">A</span><h2>6교시 · 왜 설정을 분리하는가</h2></header>
 <div class="am-panel-body"><div class="am-md"><p>설정을 이미지 안에 넣으면 값 하나 바꿀 때마다 이미지를 다시 만들어야 한다. 설정을 밖으로 빼면 <strong>같은 이미지를 개발·운영에 그대로 쓰면서 값만 갈아 끼울 수 있다.</strong></p>
@@ -958,6 +1000,67 @@ html[data-theme="paper"] .am-md table { font-family: var(--font-sans); }
 <p>스스로 점검: 앱과 DB를 한 Pod에 넣으면 안 되는 이유를 말할 수 있는가 / READY 2/2에서 두 번째 컨테이너가 어디에 정의돼 있는지 말할 수 있는가 / ConfigMap을 고쳤는데 앱에 반영되지 않는 두 가지 이유 / version 라벨을 Service selector에 넣으면 안 되는 이유 / 오늘 화면에 &quot;API 연결 실패&quot;가 뜨는 이유.</p>
 </div></div>
 </section>
+<section class="am-panel" id="panel-J">
+<header class="am-panel-head"><span class="am-panel-id">J</span><h2>이 페이지에서 쓴 명령어 정리</h2></header>
+<div class="am-panel-body"><div class="am-md"><div class="am-table-wrap"><table>
+<thead>
+<tr>
+<th>명령어</th>
+<th>하는 일</th>
+<th>메모</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>kubectl create configmap shop-config --from-literal=APP_TITLE=&quot;SkillBoost&quot;</code></td>
+<td>키-값을 명령으로 담아 ConfigMap 생성</td>
+<td>간단한 값 확인용. 실습 파일은 YAML manifest 권장</td>
+</tr>
+<tr>
+<td><code>kubectl create configmap &lt;이름&gt; --from-file=index.html</code></td>
+<td>파일 하나를 통째로 키로 담기</td>
+<td>파일 이름이 키가 된다</td>
+</tr>
+<tr>
+<td><code>kubectl create secret generic shop-db-secret --from-literal=DB_PASS=...</code></td>
+<td>Opaque 타입 Secret 생성</td>
+<td><strong>주의</strong>: 이 명령의 히스토리에 비밀값이 남는다. 실무는 manifest(base64)나 --from-file이 안전</td>
+</tr>
+<tr>
+<td><code>kubectl get configmap shop-config -n shop</code> / <code>-o yaml</code></td>
+<td>생성된 ConfigMap 확인</td>
+<td>data 아래에 키-값, binaryData는 base64</td>
+</tr>
+<tr>
+<td><code>kubectl get secret shop-db-secret -n shop -o jsonpath=&#39;{.data.DB_PASS}&#39;</code></td>
+<td>Secret의 base64 값 보기</td>
+<td>`</td>
+</tr>
+<tr>
+<td><code>kubectl describe configmap/secret &lt;이름&gt;</code></td>
+<td>데이터 개수·마운트 위치 확인</td>
+<td>Secret은 값 대신 <code>&lt;자릿수&gt; bytes</code>로 표시(로그 노출 방지)</td>
+</tr>
+<tr>
+<td><code>kubectl rollout restart deployment/shop-web -n shop</code></td>
+<td>Pod를 몰아서 다시 띄우기</td>
+<td>환경 변수 방식은 설정 변경 후 재생성이 필요. 볼륨+nginx 등 재적재 필요한 경우에도 사용</td>
+</tr>
+<tr>
+<td><code>kubectl get pods -L version</code></td>
+<td>version 라벨을 열로 보여 주기</td>
+<td>selector에 넣지 않은 라벨은 -L로 확인하는 습관</td>
+</tr>
+</tbody></table></div>
+</div></div>
+</section>
+<section class="am-panel" id="panel-K">
+<header class="am-panel-head"><span class="am-panel-id">K</span><h2>다음 페이지</h2></header>
+<div class="am-panel-body"><div class="am-md"><ul>
+<li>처음으로 — 1~2교시 Pod 개념과 생성 → <a href="day2-concepts.html">day2-concepts.html</a></li>
+<li>3~5교시 — 멀티 컨테이너와 command·env → <a href="day2-patterns.html">day2-patterns.html</a></li>
+</ul>
+</div></div>
+</section>
 </div>
 </div>
 </main>
@@ -1079,6 +1182,24 @@ shop의 라벨 체계: **app**(shop, 앱 식별) · **tier**(api·web·db, 역�
 용어 빠른 참조: **pause 컨테이너**(Pod의 네트워크 자리를 잡는 보이지 않는 컨테이너) · **emptyDir**(Pod가 사는 동안만 존재하는 빈 폴더 — 컨테이너 간 파일 교환) · **사이드카**(주 컨테이너를 거드는 보조 컨테이너) · **Downward API**(Pod 자신의 정보를 컨테이너에 알려 주는 방법) · **셀렉터**(라벨로 객체를 찾는 조건식).
 
 스스로 점검: 앱과 DB를 한 Pod에 넣으면 안 되는 이유를 말할 수 있는가 / READY 2/2에서 두 번째 컨테이너가 어디에 정의돼 있는지 말할 수 있는가 / ConfigMap을 고쳤는데 앱에 반영되지 않는 두 가지 이유 / version 라벨을 Service selector에 넣으면 안 되는 이유 / 오늘 화면에 &quot;API 연결 실패&quot;가 뜨는 이유.
+
+## 이 페이지에서 쓴 명령어 정리
+
+| 명령어 | 하는 일 | 메모 |
+|---|---|---|
+| `kubectl create configmap shop-config --from-literal=APP_TITLE=&quot;SkillBoost&quot;` | 키-값을 명령으로 담아 ConfigMap 생성 | 간단한 값 확인용. 실습 파일은 YAML manifest 권장 |
+| `kubectl create configmap &lt;이름&gt; --from-file=index.html` | 파일 하나를 통째로 키로 담기 | 파일 이름이 키가 된다 |
+| `kubectl create secret generic shop-db-secret --from-literal=DB_PASS=...` | Opaque 타입 Secret 생성 | **주의**: 이 명령의 히스토리에 비밀값이 남는다. 실무는 manifest(base64)나 --from-file이 안전 |
+| `kubectl get configmap shop-config -n shop` / `-o yaml` | 생성된 ConfigMap 확인 | data 아래에 키-값, binaryData는 base64 |
+| `kubectl get secret shop-db-secret -n shop -o jsonpath=&#39;{.data.DB_PASS}&#39;` | Secret의 base64 값 보기 | `| base64 -d`를 붙이면 원문 — 암호화가 아님을 직접 눈으로 확인 |
+| `kubectl describe configmap/secret &lt;이름&gt;` | 데이터 개수·마운트 위치 확인 | Secret은 값 대신 `&lt;자릿수&gt; bytes`로 표시(로그 노출 방지) |
+| `kubectl rollout restart deployment/shop-web -n shop` | Pod를 몰아서 다시 띄우기 | 환경 변수 방식은 설정 변경 후 재생성이 필요. 볼륨+nginx 등 재적재 필요한 경우에도 사용 |
+| `kubectl get pods -L version` | version 라벨을 열로 보여 주기 | selector에 넣지 않은 라벨은 -L로 확인하는 습관 |
+
+## 다음 페이지
+
+- 처음으로 — 1~2교시 Pod 개념과 생성 → [day2-concepts.html](day2-concepts.html)
+- 3~5교시 — 멀티 컨테이너와 command·env → [day2-patterns.html](day2-patterns.html)
 </textarea>
 <script>
 (() => {
@@ -2172,6 +2293,27 @@ if (panels.length > 1) {
   document.querySelector('[data-am="theme"]')?.addEventListener('click', later);
 }
 })();
+})();
+// Pages with a new-version button only: src/render.js adds this script after the page script.
+// The button shows where the browser has native popovers (they open and close the popover with no script). A page that am serve
+// sends to another device has no button (src/serve.js), so this script does not look at the address.
+(() => {
+  const button = document.querySelector('[data-am="update"]');
+  if (!button || !Object.hasOwn(HTMLElement.prototype, 'popover')) return;
+  button.hidden = false;
+  // Each copy button copies its data-text and reads data-done for a moment.
+  for (const copy of document.querySelectorAll('[data-am="copy-text"]')) {
+    copy.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(copy.dataset.text);
+      } catch {
+        return;
+      }
+      const label = copy.textContent;
+      copy.textContent = copy.dataset.done;
+      setTimeout(() => { copy.textContent = label; }, 1400);
+    });
+  }
 })();
 </script>
 </body>

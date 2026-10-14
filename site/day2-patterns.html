@@ -726,6 +726,36 @@ table.am-mark { background: none; }
 @media print { .am-remark-pop { display: none !important; } }
 
 
+/* New-version button and popover (src/render.js adds this file only to a page that has the button). The popover sits under the
+   toolbar and stays hidden unless open, so a browser without native popovers never shows it. */
+.am-btn--update { color: var(--ok); border-color: var(--ok); white-space: nowrap; }
+.am-update { display: none; }
+.am-update:popover-open {
+  display: block; position: fixed; inset-block: 52px auto; inset-inline: auto 12px; margin: 0; width: min(380px, calc(100vw - 24px));
+  padding: 14px 16px; font-size: 13px; color: var(--ink); background: var(--paper);
+  border: 1px solid var(--line-2); border-radius: var(--radius); box-shadow: 0 12px 40px rgba(0,0,0,.25);
+}
+.am-update p { margin: 0 0 8px; }
+.am-update-title { font-weight: 600; color: var(--ok); }
+.am-update-label { color: var(--ink-2); font-size: 12px; }
+.am-update-notes { margin: 0 0 12px; padding-inline-start: 18px; }
+.am-update-notes li { margin: 2px 0; }
+.am-update-notes code { font-size: 12px; }
+.am-update-row { display: flex; align-items: center; gap: 8px; margin: 0 0 12px; }
+.am-update-row > :first-child {
+  flex: 1; min-width: 0; overflow-x: auto; white-space: nowrap; font-size: 12px; padding: 6px 8px;
+  background: var(--bg); border: 1px solid var(--line); border-radius: var(--radius);
+}
+.am-update a { color: var(--accent); font-size: 12px; }
+/* A phone has no room for the words: the button keeps only its dot, and its aria-label still names the version. */
+@media (max-width: 760px) {
+  .am-btn--update .am-update-text { display: none; }
+}
+@media print {
+  .am-update { display: none !important; }
+}
+
+
 html[data-theme="blueprint"] .am-frame { border: 1px solid var(--line); padding: 30px; }
 html[data-theme="blueprint"] .am-frame::before {
   content: ""; position: absolute; inset: 18px; border: 1px solid var(--line); pointer-events: none;
@@ -754,17 +784,29 @@ html[data-theme="paper"] .am-md table { font-family: var(--font-sans); }
 </head>
 <body>
 <div class="am-toolbar" data-am-root-lang="ko" data-am-root-theme="blueprint" data-am-root-mode="auto" data-am-root-style="80">
+<button class="am-btn am-btn--update" type="button" data-am="update" popovertarget="am-update" aria-label="New version 0.5.2" hidden>● <span class="am-update-text">New version <bdi>0.5.2</bdi></span></button>
 <label class="am-pick">Theme<select data-am="theme"><option value="blueprint" selected>Blueprint</option><option value="shadcn">Cards</option><option value="paper">Paper</option></select></label>
 <label class="am-pick">Mode<select data-am="mode"><option value="auto" selected>Auto</option><option value="light">Light</option><option value="dark">Dark</option></select></label>
 <button class="am-btn am-btn--reply" type="button" data-am="reply" data-ui="{&quot;button&quot;:&quot;Reply&quot;,&quot;comment&quot;:&quot;Comment&quot;,&quot;commentHint&quot;:&quot;Your comment on this panel&quot;,&quot;title&quot;:&quot;Your reply&quot;,&quot;hint&quot;:&quot;Copy it and paste it into the chat.&quot;,&quot;copy&quot;:&quot;Copy reply&quot;,&quot;close&quot;:&quot;Close&quot;,&quot;suggested&quot;:&quot;suggested&quot;,&quot;empty&quot;:&quot;Pick options, or comment on a panel first.&quot;,&quot;decisions&quot;:&quot;Decisions&quot;,&quot;comments&quot;:&quot;Comments&quot;,&quot;confirmed&quot;:&quot;suggestion confirmed&quot;,&quot;untouched&quot;:&quot;not answered; suggestion kept&quot;,&quot;was&quot;:&quot;was&quot;,&quot;typed&quot;:&quot;Lines that start with \&quot;&gt;\&quot; are text the reader typed.&quot;,&quot;done&quot;:&quot;Copied ✓&quot;,&quot;remarks&quot;:&quot;Remarks&quot;,&quot;kinds&quot;:{&quot;suggestion&quot;:&quot;suggestion&quot;,&quot;keep&quot;:&quot;keep&quot;,&quot;question&quot;:&quot;question&quot;,&quot;concern&quot;:&quot;concern&quot;}}">Reply</button>
 <button class="am-btn am-btn--remark" type="button" data-am="remark" data-ui="{&quot;button&quot;:&quot;Remark&quot;,&quot;hint&quot;:&quot;Optional note&quot;,&quot;save&quot;:&quot;Save&quot;,&quot;remove&quot;:&quot;Remove&quot;,&quot;section&quot;:&quot;Remarks&quot;,&quot;kinds&quot;:{&quot;suggestion&quot;:&quot;suggestion&quot;,&quot;keep&quot;:&quot;keep&quot;,&quot;question&quot;:&quot;question&quot;,&quot;concern&quot;:&quot;concern&quot;}}">Remark</button>
 <button class="am-btn" type="button" data-am="copy" data-done="Copied ✓">Copy source</button>
 </div>
+<div class="am-update" id="am-update" popover>
+<p class="am-update-title">New version <bdi>0.5.2</bdi></p>
+<p>You have <bdi>0.5.1</bdi>. Found when this page was made.</p>
+<p class="am-update-label">What&#39;s new:</p>
+<ul class="am-update-notes"><li>Install as a DeepSeek Harness plugin: <code>dsh plugin add</code></li><li>In DeepSeek Harness, open the page from a card in the sidebar</li><li>Remark mode: marks on a timeline stay when the window width changes</li></ul>
+<p class="am-update-label">Run in a terminal:</p>
+<div class="am-update-row"><code dir="ltr">npx skills update answer-me-with-html -y</code><button class="am-btn" type="button" data-am="copy-text" data-text="npx skills update answer-me-with-html -y" data-done="Copied ✓">Copy</button></div>
+<p class="am-update-label">Or tell your agent:</p>
+<div class="am-update-row"><span>Update answer-me-with-html</span><button class="am-btn" type="button" data-am="copy-text" data-text="Update answer-me-with-html" data-done="Copied ✓">Copy</button></div>
+<a href="https://github.com/QingYunA/answer-me-with-html/releases" target="_blank" rel="noopener">See what&#39;s new</a>
+</div>
 <main class="am-doc">
-<header class="am-head"><p class="am-colophon">Generated by <a href="https://github.com/QingYunA/answer-me-with-html" target="_blank" rel="noopener">Answer me with HTML</a> 0.5.1 · 2026-10-14 09:39 · <a href="https://github.com/QingYunA/answer-me-with-html" target="_blank" rel="noopener">★ Star on GitHub</a></p><h1>쿠버네티스 2일차 3~5교시 — 멀티 컨테이너와 command/env</h1><p class="am-sub">사이드카·앰배서더·어댑터·init · ENTRYPOINT/CMD 대응과 환경 변수</p><div class="am-head-meta"><span><b>source</b>Notion Day 2 · 2일차 이론</span></div><div class="am-intro am-md"><div class="am-md"><p>한 Pod 안에 컨테이너를 여러 개 넣는 이유와 방법이다. 3~4교시는 &quot;설계 패턴&quot;, 5교시는 그것들을 채우는 &quot;문법&quot;이다.</p>
+<header class="am-head"><p class="am-colophon">Generated by <a href="https://github.com/QingYunA/answer-me-with-html" target="_blank" rel="noopener">Answer me with HTML</a> 0.5.1 · 2026-10-14 11:42 · <a href="https://github.com/QingYunA/answer-me-with-html" target="_blank" rel="noopener">★ Star on GitHub</a></p><h1>쿠버네티스 2일차 3~5교시 — 멀티 컨테이너와 command/env</h1><p class="am-sub">사이드카·앰배서더·어댑터·init · ENTRYPOINT/CMD 대응과 환경 변수</p><div class="am-head-meta"><span><b>source</b>Notion Day 2 · 2일차 이론</span></div><div class="am-intro am-md"><div class="am-md"><p>한 Pod 안에 컨테이너를 여러 개 넣는 이유와 방법이다. 3~4교시는 &quot;설계 패턴&quot;, 5교시는 그것들을 채우는 &quot;문법&quot;이다.</p>
 </div></div></header>
 <div class="am-doc-layout">
-<nav class="am-toc" aria-label="Contents"><a href="#panel-A">A · 3~4교시 · 설계 패턴 — 보조 컨테이너가 하는 네 가지 일</a><a href="#panel-B">B · 3~4교시 · init 컨테이너 — 실무 예 네 가지</a><a href="#panel-C">C · 3~4교시 · shop-web의 구조와 네이티브 사이드카</a><a href="#panel-D">D · 5교시 · command·args와 ENTRYPOINT·CMD 대응</a><a href="#panel-E">E · 5교시 · 환경 변수 세 가지 방식</a></nav><div class="am-doc-body">
+<nav class="am-toc" aria-label="Contents"><a href="#panel-A">A · 3~4교시 · 설계 패턴 — 보조 컨테이너가 하는 네 가지 일</a><a href="#panel-B">B · 3~4교시 · init 컨테이너 — 실무 예 네 가지</a><a href="#panel-C">C · 3~4교시 · shop-web의 구조와 네이티브 사이드카</a><a href="#panel-D">D · 5교시 · command·args와 ENTRYPOINT·CMD 대응</a><a href="#panel-E">E · 5교시 · 환경 변수 세 가지 방식</a><a href="#panel-F">F · 이 페이지에서 쓴 명령어 정리</a><a href="#panel-G">G · 다음 페이지</a></nav><div class="am-doc-body">
 <section class="am-panel" id="panel-A">
 <header class="am-panel-head"><span class="am-panel-id">A</span><h2>3~4교시 · 설계 패턴 — 보조 컨테이너가 하는 네 가지 일</h2></header>
 <div class="am-panel-body"><div class="am-md"><p>보조 컨테이너를 어느 위치에 두느냐에 따라 이름이 붙었다. <strong>문법이 다른 게 아니라 역할을 부르는 말</strong>일 뿐이다.</p>
@@ -908,6 +950,47 @@ html[data-theme="paper"] .am-md table { font-family: var(--font-sans); }
 <p>쇼핑몰 화면 위에 <strong>응답한 Pod 이름</strong>이 표시되는 것이 Downward API 덕분이다. 5장 롤링 업데이트에서 &quot;어느 Pod가 응답했는지&quot; 눈으로 확인하는 장치로 쓰인다.</p>
 </div></div>
 </section>
+<section class="am-panel" id="panel-F">
+<header class="am-panel-head"><span class="am-panel-id">F</span><h2>이 페이지에서 쓴 명령어 정리</h2></header>
+<div class="am-panel-body"><div class="am-md"><div class="am-table-wrap"><table>
+<thead>
+<tr>
+<th>명령어</th>
+<th>하는 일</th>
+<th>메모</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>kubectl logs &lt;pod&gt; -c &lt;컨테이너&gt;</code></td>
+<td>특정 컨테이너의 로그 보기</td>
+<td>Pod에 컨테이너가 여러 개면 -c 필수. init 컨테이너 로그도 같은 방법</td>
+</tr>
+<tr>
+<td><code>kubectl logs &lt;pod&gt; -c &lt;컨테이너&gt; -f</code></td>
+<td>로그를 실시간으로 계속 보기</td>
+<td>사이드카가 로그를 모으고 있는지 확인할 때</td>
+</tr>
+<tr>
+<td><code>kubectl get pod &lt;pod&gt;</code> / <code>-o wide</code></td>
+<td>READY 계산 확인</td>
+<td><code>2/2</code>면 사이드카(네이티브)까지 포함, <code>Init:0/1</code>이면 init 진행 중</td>
+</tr>
+<tr>
+<td><code>kubectl describe pod &lt;pod&gt;</code></td>
+<td>init 진행 상황·재시작 원인 확인</td>
+<td><strong>Init Containers</strong> 항목과 Events의 <code>StartContainer</code> 실패 로그가 단서</td>
+</tr>
+</tbody></table></div>
+</div></div>
+</section>
+<section class="am-panel" id="panel-G">
+<header class="am-panel-head"><span class="am-panel-id">G</span><h2>다음 페이지</h2></header>
+<div class="am-panel-body"><div class="am-md"><ul>
+<li>6~8교시 — ConfigMap·Secret과 Label → <a href="day2-config.html">day2-config.html</a></li>
+<li>처음으로 — 1~2교시 Pod 개념과 생성 → <a href="day2-concepts.html">day2-concepts.html</a></li>
+</ul>
+</div></div>
+</section>
 </div>
 </div>
 </main>
@@ -997,6 +1080,20 @@ command: [&quot;sh&quot;, &quot;-c&quot;, &quot;touch /var/log/nginx/access.log;
 | Downward API | Pod 이름 · 네임스페이스 · 노드 이름을 컨테이너에 알려 줌 |
 
 쇼핑몰 화면 위에 **응답한 Pod 이름**이 표시되는 것이 Downward API 덕분이다. 5장 롤링 업데이트에서 &quot;어느 Pod가 응답했는지&quot; 눈으로 확인하는 장치로 쓰인다.
+
+## 이 페이지에서 쓴 명령어 정리
+
+| 명령어 | 하는 일 | 메모 |
+|---|---|---|
+| `kubectl logs &lt;pod&gt; -c &lt;컨테이너&gt;` | 특정 컨테이너의 로그 보기 | Pod에 컨테이너가 여러 개면 -c 필수. init 컨테이너 로그도 같은 방법 |
+| `kubectl logs &lt;pod&gt; -c &lt;컨테이너&gt; -f` | 로그를 실시간으로 계속 보기 | 사이드카가 로그를 모으고 있는지 확인할 때 |
+| `kubectl get pod &lt;pod&gt;` / `-o wide` | READY 계산 확인 | `2/2`면 사이드카(네이티브)까지 포함, `Init:0/1`이면 init 진행 중 |
+| `kubectl describe pod &lt;pod&gt;` | init 진행 상황·재시작 원인 확인 | **Init Containers** 항목과 Events의 `StartContainer` 실패 로그가 단서 |
+
+## 다음 페이지
+
+- 6~8교시 — ConfigMap·Secret과 Label → [day2-config.html](day2-config.html)
+- 처음으로 — 1~2교시 Pod 개념과 생성 → [day2-concepts.html](day2-concepts.html)
 </textarea>
 <script>
 (() => {
@@ -2090,6 +2187,27 @@ if (panels.length > 1) {
   document.querySelector('[data-am="theme"]')?.addEventListener('click', later);
 }
 })();
+})();
+// Pages with a new-version button only: src/render.js adds this script after the page script.
+// The button shows where the browser has native popovers (they open and close the popover with no script). A page that am serve
+// sends to another device has no button (src/serve.js), so this script does not look at the address.
+(() => {
+  const button = document.querySelector('[data-am="update"]');
+  if (!button || !Object.hasOwn(HTMLElement.prototype, 'popover')) return;
+  button.hidden = false;
+  // Each copy button copies its data-text and reads data-done for a moment.
+  for (const copy of document.querySelectorAll('[data-am="copy-text"]')) {
+    copy.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(copy.dataset.text);
+      } catch {
+        return;
+      }
+      const label = copy.textContent;
+      copy.textContent = copy.dataset.done;
+      setTimeout(() => { copy.textContent = label; }, 1400);
+    });
+  }
 })();
 </script>
 </body>
