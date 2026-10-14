@@ -1003,7 +1003,7 @@ html[data-theme="paper"] .am-md table { font-family: var(--font-sans); }
 </section>
 <section class="am-panel" id="panel-G">
 <header class="am-panel-head"><span class="am-panel-id">G</span><h2>태스크 3 — init 컨테이너와 네이티브 사이드카 (4교시)</h2></header>
-<div class="am-panel-body"><div class="am-md"><p><strong>이 태스크는 왜 하는가</strong> — 2일차 3교시의 두 정의(&quot;init은 먼저 실행돼 끝난다&quot;, &quot;네이티브 사이드카는 끝나지 않고 상주한다&quot;)를 차례로 실험하기 위해서다. 3.1의 lab03-init으로 <code>Init:0/1</code> 상태와 파일 전달을 확인���고, 3.2의 shop-web에서 같은 자리(initContainers)에 <code>restartPolicy: Always</code>를 붙였을 때 READY <code>2/2</code>로 계산이 바뀌는 것을 관찰한다. 이 Pod가 낙오되지 않으면 이후 모든 실습의 로그 확인이 이 사이드카를 통해서다.</p>
+<div class="am-panel-body"><div class="am-md"><p><strong>이 태스크는 왜 하는가</strong> — 2일차 3교시의 두 정의(&quot;init은 먼저 실행돼 끝난다&quot;, &quot;네이티브 사이드카는 끝나지 않고 상주한다&quot;)를 차례로 실험하기 위해서다. 3.1의 lab03-init으로 <code>Init:0/1</code> 상태와 파일 전달을 확인하고, 3.2의 shop-web에서 같은 자리(initContainers)에 <code>restartPolicy: Always</code>를 붙였을 때 READY <code>2/2</code>로 계산이 바뀌는 것을 관찰한다. 이 Pod가 낙오되지 않으면 이후 모든 실습의 로그 확인이 이 사이드카를 통해서다.</p>
 <h3>3.1 init 컨테이너 먼저 체험</h3>
 <p><strong>단계 16.</strong> 앱보다 먼저 실행되어 파일을 만드는 init 컨테이너를 체험한다.</p>
 </div>
@@ -1514,7 +1514,7 @@ pod &quot;lab03-multi&quot; deleted
 
 ## 태스크 3 — init 컨테이너와 네이티브 사이드카 (4교시)
 
-**이 태스크는 왜 하는가** — 2일차 3교시의 두 정의(&quot;init은 먼저 실행돼 끝난다&quot;, &quot;네이티브 사이드카는 끝나지 않고 상주한다&quot;)를 차례로 실험하기 위해서다. 3.1의 lab03-init으로 `Init:0/1` 상태와 파일 전달을 확인���고, 3.2의 shop-web에서 같은 자리(initContainers)에 `restartPolicy: Always`를 붙였을 때 READY `2/2`로 계산이 바뀌는 것을 관찰한다. 이 Pod가 낙오되지 않으면 이후 모든 실습의 로그 확인이 이 사이드카를 통해서다.
+**이 태스크는 왜 하는가** — 2일차 3교시의 두 정의(&quot;init은 먼저 실행돼 끝난다&quot;, &quot;네이티브 사이드카는 끝나지 않고 상주한다&quot;)를 차례로 실험하기 위해서다. 3.1의 lab03-init으로 `Init:0/1` 상태와 파일 전달을 확인하고, 3.2의 shop-web에서 같은 자리(initContainers)에 `restartPolicy: Always`를 붙였을 때 READY `2/2`로 계산이 바뀌는 것을 관찰한다. 이 Pod가 낙오되지 않으면 이후 모든 실습의 로그 확인이 이 사이드카를 통해서다.
 
 ### 3.1 init 컨테이너 먼저 체험
 
