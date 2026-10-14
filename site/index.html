@@ -138,6 +138,23 @@
 </div>
 
 <div class="group">
+  <h2>🧰 실습 — Lab03: shop 첫 배포 <em>(Pod · 사이드카 · ConfigMap · Secret · Label)</em></h2>
+  <p class="sub">Lab02 클러스터에 SkillBoost 쇼핑몰 첫 배포 · 만든 리소스는 Lab04 이후 계속 사용</p>
+</div>
+
+<div class="card">
+  <h2>Lab03 (1/2) — 첫 배포와 네트워크 공유 <em>(태스크 1~3)</em></h2>
+  <a href="cap-cluster-lab/lab03-part1.html">cap-cluster-lab/lab03-part1.html 열기 →</a>
+  <p>shop 네임스페이스 · shop-api 첫 Pod(dry-run 뼈대 → manifest) · Running 감시 · Events 읽기 · Pod IP curl · lab03-multi로 네트워크 공유/파일시스템 비공유 확인 · lab03-init 실행 순서 · shop-web 네이티브 사이드카와 emptyDir 로그 수집 — Pod 해부도 다이어그램 임베드.</p>
+</div>
+
+<div class="card">
+  <h2>Lab03 (2/2) — 실행 조정 · 설정 분리 · 라벨 · 채점 <em>(태스크 4~7 + 선택 3종)</em></h2>
+  <a href="cap-cluster-lab/lab03-part2.html">cap-cluster-lab/lab03-part2.html 열기 →</a>
+  <p>command·args 덮어쓰기와 $(VAR)/$VAR 두 치환 · kubectl edit 후 Forbidden 오류 체험 · ConfigMap(envFrom/볼륨) · Secret(secretKeyRef, base64 아님) · version 라벨과 --overwrite · 어노테이션은 조회 안 됨 · 채점 14/14 · 선택: ConfigMap 자동 갱신 관찰, Fluent Bit 로그 파싱, items·defaultMode 부분 마운트.</p>
+</div>
+
+<div class="group">
   <h2>📎 비교용 — 이전 버전</h2>
 </div>
 
