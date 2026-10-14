@@ -86,6 +86,35 @@
 </div>
 
 <div class="group">
+  <h2>🌱 2일차 — Pod와 설정 분리 <em>(SkillBoost 쇼핑몰 올리기)</em></h2>
+  <p class="sub">3-1 Pod 개념 · 3-2 생성 · 3-3 멀티 컨테이너 · 3-4 command/env · 3-5 ConfigMap·Secret · 3-6 Label</p>
+</div>
+
+<div class="card">
+  <h2>⭐ 1~2교시 — Pod 개념과 생성 <em>(archify Pod 해부도 포함)</em></h2>
+  <a href="day2-concepts.html">day2-concepts.html 열기 →</a>
+  <p>왜 컨테이너가 아니라 Pod인가 · pause 컨테이너(First In Last Out) · 네 가지 기준으로 보는 분리 판별 · manifest 해부 · kubectl edit 한계 · apiVersion 찾기 · 이미지 주소와 latest 경고 · 네임스페이스 — Pod 해부 archify 다이어그램이 페이지 안에서 바로 실행된다.</p>
+</div>
+
+<div class="card">
+  <h2>3~5교시 — 멀티 컨테이너와 command·env</h2>
+  <a href="day2-patterns.html">day2-patterns.html 열기 →</a>
+  <p>사이드카·앰배서더·어댑터·init 네 가지 패턴 비교, init 실무 예 4가지(DB 대기·마이그레이션·파일 준비·권한), 네이티브 사이드카와 READY 2/2의 의미, ENTRYPOINT·CMD 대응, 환경 변수 세 방식(Downward API).</p>
+</div>
+
+<div class="card">
+  <h2>6~8교시 — ConfigMap·Secret과 Label·Annotation</h2>
+  <a href="day2-config.html">day2-config.html 열기 →</a>
+  <p>소비 방식별 갱신 반영 표(가장 중요), items·defaultMode로 골라 마운트, 1MiB 한도의 이유(etcd), Secret은 암호화가 아니다 — 4가지 타입과 놓이는 세 곳, immutable, version 라벨을 selector에 넣으면 안 되는 이유, 핵심 10문장.</p>
+</div>
+
+<div class="card">
+  <h2>Pod 해부도 다이어그램 (단독)</h2>
+  <a href="pod-anatomy.html">pod-anatomy.html 열기 ��</a>
+  <p>pause가 만드는 공유 공간 — 네트워크·볼륨·사이드카·init 배치와 실행 순서를 한 장의 인터랙티브 도면으로.</p>
+</div>
+
+<div class="group">
   <h2>📎 비교용 — 이전 버전</h2>
 </div>
 
